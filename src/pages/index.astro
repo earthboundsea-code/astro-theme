@@ -42,11 +42,17 @@ import Layout from '../layouts/Layout.astro';
         
       <div class="relative z-0 w-full aspect-[16/9] bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center backdrop-blur-sm shadow-[0_0_50px_rgba(34,211,238,0.1)] overflow-hidden">
   
-  <img 
-    src="/boardgame.png" 
-    alt="GrowUpward Cybersecurity Board Game" 
-    class="w-full h-full object-contain p-8 drop-shadow-[0_0_30px_rgba(34,211,238,0.3)] hover:scale-105 transition-transform duration-500" 
-  />
+<video 
+  autoplay 
+  loop 
+  muted 
+  playsinline 
+  poster="/boardgame.png"
+  class="w-full h-full object-cover rounded-2xl"
+>
+  <source src="/hero-video.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
 
 </div>
         </div>
