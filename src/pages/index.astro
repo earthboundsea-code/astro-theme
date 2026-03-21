@@ -40,11 +40,17 @@ import Layout from '../layouts/Layout.astro';
       <div class="mt-16 relative w-full max-w-4xl mx-auto">
         <div class="absolute bottom-0 inset-x-0 h-1/3 bg-gradient-to-t from-[#0a0a0a] to-transparent z-10"></div>
         
-        <div class="relative z-0 w-full aspect-[16/9] bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center backdrop-blur-sm shadow-[0_0_50px_rgba(34,211,238,0.1)]">
-          <span class="text-gray-500 font-mono">[ UPLOAD TRANSPARENT BOARD GAME 3D RENDER HERE ]</span>
+      <div class="relative z-0 w-full aspect-[16/9] bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center backdrop-blur-sm shadow-[0_0_50px_rgba(34,211,238,0.1)] overflow-hidden">
+  
+  <img 
+    src="/boardgame.png" 
+    alt="GrowUpward Cybersecurity Board Game" 
+    class="w-full h-full object-contain p-8 drop-shadow-[0_0_30px_rgba(34,211,238,0.3)] hover:scale-105 transition-transform duration-500" 
+  />
+
+</div>
         </div>
       </div>
 
-    </div>
   </section>
   </Layout>
