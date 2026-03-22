@@ -117,25 +117,5 @@ const jobs = [
         </Container>
     </section>
 
-    <section id="apply" class="py-32 bg-white/[0.01]">
-        <Container>
-            <div class="max-w-2xl mx-auto bg-white/5 border border-white/10 p-10 md:p-16 rounded-[2.5rem] shadow-2xl">
-                <h3 class="text-2xl font-bold mb-10 text-center uppercase tracking-widest italic">Submit Application</h3>
-                <form class="space-y-6">
-                    <input type="text" required placeholder="Full Name" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition" />
-                    <input type="email" required placeholder="Email Address" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition" />
-                    <select class="w-full bg-[#0a0a0a] border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition font-bold uppercase text-xs">
-                        {jobs.map(job => <option value={job.title}>{job.title}</option>)}
-                    </select>
-                    <input type="file" accept=".pdf" required class="block w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-cyan-400 file:text-black cursor-pointer" />
-                    <textarea rows="4" placeholder="Message..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition resize-none"></textarea>
-                    <button type="submit" class="w-full py-4 bg-cyan-400 hover:bg-white text-black font-black rounded-full transition-all duration-300 uppercase tracking-widest text-sm">
-                        Submit
-                    </button>
-                </form>
-            </div>
-        </Container>
-    </section>
-
   </main>
 </Layout>
