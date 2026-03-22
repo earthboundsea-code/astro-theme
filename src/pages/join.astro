@@ -40,7 +40,7 @@ const jobs = [
             
             <div class="max-w-md mx-auto relative group mb-8 md:mb-12 mt-4">
                 <div class="absolute -inset-1 bg-cyan-400/20 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                <input type="text" placeholder="ค้นหาตำแหน่งงาน..." class="relative w-full bg-white/5 border border-white/10 backdrop-blur-md rounded-full py-4 px-8 outline-none focus:border-cyan-400/50 transition text-sm text-white placeholder:text-gray-500" />
+               <input type="text" id="jobSearch" placeholder="ค้นหาตำแหน่งงาน..." class="relative w-full bg-white/5 border border-white/10 backdrop-blur-md rounded-full py-4 px-8 outline-none focus:border-cyan-400/50 transition text-sm text-white placeholder:text-gray-500" />
                 <button class="absolute right-6 top-1/2 -translate-y-1/2 text-cyan-400 hover:scale-110 transition-transform">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -88,14 +88,16 @@ const jobs = [
                     <span class="h-px flex-1 bg-white/5"></span>
                 </h2>
 
-                <div class="space-y-4">
-                    {jobs.map((job) => (
-                        <div class="p-6 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-cyan-400/30 transition-all duration-500 flex flex-col md:flex-row justify-between items-center gap-6 group">
-                            <div class="text-center md:text-left">
-                                <h4 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors flex flex-wrap items-center justify-center md:justify-start gap-3">
-                                    {job.title}
-                                    <span class={`text-[9px] px-2 py-1 rounded italic uppercase tracking-widest font-black ${job.status.includes('เดือน 4') ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-400/30' : 'bg-white/10 text-gray-400'}`}>
-                                        {job.status}
+                <div class="space-y-4" id="jobContainer">
+    {jobs.map((job) => (
+        // เพิ่ม class "job-card" ตรงนี้
+        <div class="job-card p-6 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-cyan-400/30 transition-all duration-500 flex flex-col md:flex-row justify-between items-center gap-6 group">
+            <div class="text-center md:text-left">
+                // เพิ่ม class "job-title" ตรง h4 นี้
+                <h4 class="job-title text-xl font-bold text-white group-hover:text-cyan-400 transition-colors flex flex-wrap items-center justify-center md:justify-start gap-3">
+                    {job.title}
+                    <span class={`text-[9px] px-2 py-1 rounded italic uppercase tracking-widest font-black ${job.status.includes('เดือน 4') ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-400/30' : 'bg-white/10 text-gray-400'}`}>
+                        {job.status}
                                     </span>
                                 </h4>
                                 <div class="flex items-center gap-3 mt-2 justify-center md:justify-start">
@@ -121,3 +123,26 @@ const jobs = [
 
   </main>
 </Layout>
+<script>
+  // ฟังก์ชันสำหรับการ Search
+  const jobSearch = document.getElementById('jobSearch');
+  const jobCards = document.querySelectorAll('.job-card');
+
+  if (jobSearch) {
+    jobSearch.addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+
+      jobCards.forEach((card) => {
+        // ดึงชื่อตำแหน่งงานจาก class .job-title
+        const title = card.querySelector('.job-title').textContent.toLowerCase();
+        
+        // ถ้าคำค้นหาตรงกับชื่อตำแหน่ง ให้แสดงผล (flex) ถ้าไม่ตรงให้ซ่อน (none)
+        if (title.includes(term)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
+</script>
