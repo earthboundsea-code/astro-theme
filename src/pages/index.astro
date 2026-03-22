@@ -41,15 +41,13 @@ import Container from '../components/Container.astro';
         
         <div class="relative z-0 w-full aspect-video bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center backdrop-blur-sm shadow-[0_0_50px_rgba(34,211,238,0.1)] overflow-hidden">
           
-        <video 
+    <video 
   id="heroVideo"
   autoplay 
   loop 
   muted 
   playsinline 
   webkit-playsinline
-  disablePictureInPicture
-  controls="false"
   preload="auto"
   poster="/boardgame.png" 
   class="w-full h-full object-cover pointer-events-none"
@@ -61,10 +59,20 @@ import Container from '../components/Container.astro';
   document.addEventListener('DOMContentLoaded', () => {
     const video = document.getElementById('heroVideo');
     if (video) {
-      // พยายามสั่งให้วิดีโอเล่นทันทีที่โหลดเว็บเสร็จ
-      video.play().catch(error => {
-        console.log("วิดีโอไม่สามารถเล่นอัตโนมัติได้ อาจเป็นเพราะโหมดประหยัดพลังงาน (Low Power Mode) ของมือถือ");
-      });
+      // 1. พยายามเล่นทันทีที่โหลดเว็บเสร็จ
+      let playPromise = video.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          // 2. ถ้าเล่นไม่ได้ (เช่น โดนบล็อกเพราะโหมดประหยัดแบต)
+          console.log("Auto-play was prevented by iOS Low Power Mode.");
+          
+          // 3. ดักรอให้ผู้ใช้แตะหน้าจอ 1 ครั้ง แล้วแอบกด Play ให้
+          window.addEventListener('touchstart', () => {
+            video.play();
+          }, { once: true }); // ทำแค่ครั้งเดียว
+        });
+      }
     }
   });
 </script>
@@ -76,11 +84,13 @@ import Container from '../components/Container.astro';
 </Layout>
 
 <style>
-  @keyframes grid-flow {
-    0% { background-position: 0 0; }
-    100% { background-position: 4rem 4rem; }
+  /* ท่าไม้ตายซ่อนปุ่ม Play ใหญ่ๆ ตรงกลางของ iOS Safari */
+  video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
   }
-  .animate-grid-flow {
-    animation: grid-flow 20s linear infinite;
+  
+  video::-webkit-media-controls {
+    display: none !important;
   }
 </style>
