@@ -41,19 +41,33 @@ import Container from '../components/Container.astro';
         
         <div class="relative z-0 w-full aspect-video bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center backdrop-blur-sm shadow-[0_0_50px_rgba(34,211,238,0.1)] overflow-hidden">
           
-          <video 
-            autoplay 
-            loop 
-            muted 
-            playsinline 
-            webkit-playsinline
-            preload="auto"
-            poster="/boardgame.png" 
-            class="w-full h-full object-cover"
-          >
-            <source src="/hero-video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+        <video 
+  id="heroVideo"
+  autoplay 
+  loop 
+  muted 
+  playsinline 
+  webkit-playsinline
+  disablePictureInPicture
+  controls="false"
+  preload="auto"
+  poster="/boardgame.png" 
+  class="w-full h-full object-cover pointer-events-none"
+>
+  <source src="/hero-video.mp4" type="video/mp4" />
+</video>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('heroVideo');
+    if (video) {
+      // พยายามสั่งให้วิดีโอเล่นทันทีที่โหลดเว็บเสร็จ
+      video.play().catch(error => {
+        console.log("วิดีโอไม่สามารถเล่นอัตโนมัติได้ อาจเป็นเพราะโหมดประหยัดพลังงาน (Low Power Mode) ของมือถือ");
+      });
+    }
+  });
+</script>
 
         </div>
       </div>
