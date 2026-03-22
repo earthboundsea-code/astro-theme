@@ -80,7 +80,6 @@ import Container from '../components/Container.astro';
 
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
-        // ส่วนจัดการข้อมูลรายละเอียดงาน
         const params = new URLSearchParams(window.location.search);
         const role = params.get('role');
 
@@ -91,72 +90,84 @@ import Container from '../components/Container.astro';
         const formRoleDisplay = document.getElementById('form-role-display');
         const hiddenRoleInput = document.getElementById('hidden-role');
 
+        // 📝 ฐานข้อมูลรายละเอียดงานทั้ง 10 ตำแหน่ง (คงเดิม 100%)
         const jobData = {
-            "Cybersecurity & PDPA Consultant": {
+            // --- FULL-TIME ---
+           "Cybersecurity & PDPA Consultant": {
                 type: "Full-time", location: "Bangkok (Hybrid)",
-                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ให้คำปรึกษาด้าน Cybersecurity และ PDPA แก่ลูกค้า B2B ตรวจประเมิน (Audit) ให้เป็นไปตามมาตรฐานสากล</li><li>พัฒนาและวางระบบ PDPA รวมถึงจัดทำ Data Mapping และร่างนโยบายความเป็นส่วนตัว</li><li>ออกแบบและนำนโยบายความปลอดภัยไซเบอร์ไปปฏิบัติใช้</li></ul>"
+                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ให้คำปรึกษาด้าน Cybersecurity และ PDPA แก่ลูกค้า B2B ตรวจประเมิน (Audit) ให้เป็นไปตามมาตรฐานสากล</li><li>พัฒนาและวางระบบ PDPA รวมถึงจัดทำ Data Mapping, ร่างนโยบายความเป็นส่วนตัว และให้คำปรึกษาด้านการจัดการข้อมูลให้ถูกต้องตามกฎหมาย</li><li>ออกแบบและนำนโยบายด้านความปลอดภัยทางไซเบอร์ไปปฏิบัติใช้ พร้อมดูแลสถาปัตยกรรมความปลอดภัยสำหรับ Web Application, Database และระบบ Cloud</li><li>ดำเนินการประเมินความเสี่ยงด้านไอที (IT Risk Assessment) ค้นหาช่องโหว่ และจัดทำรายงานเพื่อสนับสนุนการตรวจสอบระบบ (IT Audit) จากทั้งภายในและภายนอก</li><li>เฝ้าระวังและตอบสนองต่อเหตุการณ์ละเมิดความปลอดภัยทางไซเบอร์ (Incident Response) พร้อมเสนอแนะและควบคุมดูแลกลยุทธ์ในการลดความเสี่ยง</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>วุฒิปริญญาตรีในสาขา Cybersecurity, Computer Engineering, IT, นิติศาสตร์ หรือสาขาที่เกี่ยวข้อง</li><li>มีความเข้าใจในหลักการของกฎหมาย PDPA ของไทย และมีความสนใจในมาตรฐานความปลอดภัยสากล (เช่น ISO 27001 หรือ NIST)</li><li>มีความรู้พื้นฐานด้าน Network, Cloud Computing (AWS/Azure/GCP) หรือความปลอดภัยของระบบจากการเรียนหรือการฝึกงาน และพร้อมที่จะเรียนรู้การใช้เครื่องมือความปลอดภัยใหม่ๆ</li><li>พิจารณาเป็นพิเศษ: หากเคยผ่านการฝึกงานในสายงานที่เกี่ยวข้อง, เคยแข่งขันด้าน Cybersecurity (เช่น CTF), หรือมีใบรับรองพื้นฐาน เช่น CompTIA Security+, Google Cybersecurity Certificate หรือ AZ-500</li></ul>"
             },
-            "B2B Tech Solutions Sales": {
+           "B2B Tech Solutions Sales": {
                 type: "Full-time (Junior)", location: "Bangkok (Hybrid)",
-                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ค้นหาและขยายฐานลูกค้าองค์กร (B2B) และวางแผนกลยุทธ์การขาย</li><li>เข้าพบลูกค้า นำเสนอ และสาธิตโซลูชัน (Product Demo)</li></ul>"
+                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ค้นหาและขยายฐานลูกค้าองค์กร (B2B) พร้อมวางแผนกลยุทธ์การขายเพื่อให้บรรลุเป้าหมาย</li><li> เข้าพบลูกค้า นำเสนอ และสาธิตโซลูชัน (Product Demo) อย่างมืออาชีพ</li><li> วิเคราะห์ความต้องการของลูกค้า และนำเสนอเทคโนโลยีที่เหมาะสมที่สุด</li><li> ดูแลกระบวนการขายตั้งแต่เริ่มต้นจนปิดการขาย รวมถึงการติดตามผลอย่างต่อเนื่อง</li><li> สร้างความสัมพันธ์ระยะยาวกับลูกค้า และประสานงานกับทีมภายใน พร้อมบันทึกข้อมูลในระบบ CRM</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ปริญญาตรีด้านบริหารธุรกิจ การตลาด ไอที หรือสาขาที่เกี่ยวข้อง </li><li>มีทักษะการสื่อสาร การนำเสนอ และการเจรจาต่อรองที่ดี</li><li>มีความมุ่งมั่นด้านงานขาย ชอบความท้าทาย และพร้อมรับมือกับการปฏิเสธ</li><li>สามารถอธิบายโซลูชันทางเทคนิคให้เข้าใจง่ายในเชิงธุรกิจ</li><li><b>พิจารณาเป็นพิเศษ:</b> หากมีความรู้ด้าน Cloud, AI หรือ SaaS</li></ul>"
             },
-            "Lead AI / Full-Stack Engineer": {
+       "Lead AI / Full-Stack Engineer": {
                 type: "Junior / Fast-track Lead", location: "Bangkok (Hybrid)",
-                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ออกแบบและพัฒนาโซลูชัน AI และระบบ Full-Stack แบบ End-to-End</li></ul>"
+                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> ออกแบบและพัฒนาโซลูชันด้าน AI และระบบ Full-Stack ตั้งแต่เริ่มต้นจนสามารถใช้งานจริง (End-to-End)</li><li>นำทีมพัฒนา กำหนดทิศทางเทคโนโลยีที่เหมาะสม และดูแลคุณภาพของโค้ดให้ได้มาตรฐาน</li><li>พัฒนาและเชื่อมต่อระบบ Backend, Frontend และ AI models ให้ทำงานร่วมกันได้อย่างมีประสิทธิภาพ</li><li> วิเคราะห์ความต้องการทางธุรกิจ และแปลงเป็นโซลูชันเชิงเทคนิคที่ใช้งานได้จริง</li><li> ทำงานร่วมกับทีม Product, Design และ Business เพื่อส่งมอบงานที่มีคุณภาพตามเป้าหมาย</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ปริญญาตรีสาขา Computer Engineering, IT หรือสาขาที่เกี่ยวข้อง</li><li>มีความเข้าใจดีเยี่ยมใน JavaScript (React/Next.js) และ Backend (Node.js/Python)</li><li>มีประสบการณ์หรือโปรเจกต์ที่เกี่ยวข้องกับ AI เช่น LLMs และ NLP</li><li>เข้าใจระบบฐานข้อมูล (SQL/NoSQL) และโครงสร้าง Cloud Infrastructure</li><li><b>พิจารณาเป็นพิเศษ:</b> มีประสบการณ์พัฒนา AI Platform / SaaS หรือคุ้นเคยกับ Docker, Kubernetes และ CI/CD</li></ul>"
             },
             "Penetration Tester / Ethical Hacker": {
                 type: "Full-time", location: "Bangkok (Hybrid)",
-                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ทดสอบเจาะระบบ Web, Network และ Application เพื่อค้นหาจุดอ่อน</li></ul>"
+               desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> ดำเนินการทดสอบเจาะระบบทั้งในส่วน Web, Network และ Application เพื่อค้นหาจุดอ่อน</li><li> วิเคราะห์และระบุช่องโหว่ด้านความปลอดภัย พร้อมจัดลำดับความสำคัญของความเสี่ยง (Risk Scoring)</li><li>จัดทำรายงานผลการทดสอบที่ละเอียดชัดเจน พร้อมข้อเสนอแนะเชิงเทคนิคในการแก้ไขปัญหา</li><li>ทำงานร่วมกับทีมพัฒนาเพื่ออุดช่องโหว่และปรับปรุงระบบให้แข็งแกร่งยิ่งขึ้น</li><li> ร่วมออกแบบด่านจำลองการโจมตีและเคสตัวอย่างสำหรับ Simulation Platform ของบริษัท</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ปริญญาตรีสาขา Cybersecurity, Computer Science, IT หรือที่เกี่ยวข้อง</li><li>มีความรู้พื้นฐานแน่นด้าน Network Security, Web App Security และระบบปฏิบัติการ (Linux/Windows)</li><li>มีความเข้าใจในการทำ Penetration Testing และรู้จักมาตรฐานอย่าง OWASP Top 10 เป็นอย่างดี</li><li>คุ้นเคยกับการใช้เครื่องมือมาตรฐาน เช่น Burp Suite, Metasploit, Nmap หรือ Wireshark</li><li>มีทักษะการเขียนโปรแกรมหรือ Scripting (Python, Bash) เพื่อช่วยในการทดสอบอัตโนมัติ</li><li> หากมีใบเซอร์ฯ พื้นฐาน เช่น CompTIA PenTest+, eJPT หรือเคยแข่งCTFจะพิจารณาเป็นพิเศษ </li></ul>"
             },
-            "AI / Machine Learning Intern": {
+
+            // --- INTERNSHIPS ---
+           "AI / Machine Learning Intern": {
                 type: "Internship (3 Months)", location: "Hybrid / Remote",
-                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>สร้างและพัฒนาโมเดลตรวจจับกลโกงจาก Text, Phone และ Image</li></ul>"
+                desc: "<p>ร่วมเป็นส่วนหนึ่งในการพัฒนาระบบตรวจจับการทุจริตอัจฉริยะ โดยการสร้างและพัฒนาโมเดล AI เพื่อวิเคราะห์รูปแบบกลโกงที่ซับซ้อนจากชุดข้อมูลจริงหลากหลายรูปแบบ<p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> สร้างและพัฒนาโมเดลสำหรับตรวจจับกลโกงจากข้อมูลข้อความ (Text), ข้อมูลโทรศัพท์ และรูปภาพ</li><li> จัดเตรียมและติดป้ายกำกับข้อมูล (Data Preprocessing and Labeling) ทั้งแบบมีโครงสร้างและไม่มีโครงสร้าง</li><li> ฝึกฝนและปรับจูนโมเดล (Model Training) เพื่อตรวจจับรูปแบบที่น่าสงสัยและวิเคราะห์ภัยคุกคาม</li><li> วัดผลและปรับปรุงประสิทธิภาพของโมเดลด้วยค่า Accuracy, Precision, Recall และ F1-score</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>กำลังศึกษาหรือจบใหม่ในสาขา Computer Science, Data Science, AI หรือสาขาที่เกี่ยวข้อง</li><li>พื้นฐานแน่นเรื่อง Machine Learning (Classification, Regression, Evaluation Metrics)</li><li>เชี่ยวชาญภาษา Python และการใช้ Library เช่น TensorFlow, PyTorch หรือ Scikit-learn</li><li>มีความสนใจด้าน NLP, Computer Vision หรือการตรวจจับ Deepfake</li><li>คุ้นเคยกับเครื่องมือจัดการข้อมูล เช่น Pandas, NumPy และมีความรู้พื้นฐานด้าน SQL</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่จะได้รับ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> ประสบการณ์ลงมือทำจริงในการใช้ AI ตรวจจับการทุจริตและภัยคุกคามไซเบอร์</li><li> เรียนรู้การสร้างเทคโนโลยีที่เน้นความเชื่อมั่นเพื่อปกป้องผู้ใช้งานจริง</li><li> ทำงานร่วมกับทีม Lead Engineer และทีม Data ในโปรเจกต์ระดับองค์กร</li></ul>"
             },
             "Cybersecurity Analyst Intern": {
                 type: "Internship (3 Months)", location: "Hybrid / Remote",
-                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>วิเคราะห์รูปแบบการหลอกลวงและระบุระดับความเสี่ยงภัยคุกคาม</li></ul>"
+                desc: "<p>ร่วมเป็นส่วนหนึ่งในการพัฒนาเทคโนโลยีตรวจจับการทุจริตออนไลน์ โดยการนำข้อมูลเชิงลึกด้านภัยคุกคามมาวิเคราะห์และประยุกต์ใช้กับระบบจริง เพื่อสร้างโลกดิจิทัลที่ปลอดภัยยิ่งขึ้น</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> วิเคราะห์รูปแบบการหลอกลวงออนไลน์และระบุระดับความเสี่ยงของภัยคุกคาม</li><li> สนับสนุนการสร้างกฎ (Rules) และตรรกะในการตรวจจับการทุจริตให้กับระบบ</li><li>จัดหมวดหมู่และติดป้ายกำกับข้อมูล (Data Labeling) ทั้งแบบมีโครงสร้างและไม่มีโครงสร้าง</li><li>ทำงานร่วมกับทีม Product และ Engineering เพื่อเพิ่มความแม่นยำให้กับระบบ</li><li> เปลี่ยนผลการวิเคราะห์ให้เป็นข้อมูลเชิงลึกที่สามารถนำไปใช้งานต่อได้จริง</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>กำลังศึกษาหรือจบใหม่ในสาขา Cybersecurity, IT, Computer Science หรือสาขาที่เกี่ยวข้อง</li><li>มีความเข้าใจพื้นฐานเรื่องภัยคุกคาม (Phishing, Scams, Malware, Social Engineering)</li><li>มีทักษะการวิเคราะห์ดีเยี่ยม ละเอียดรอบคอบ และคุ้นเคยกับ Excel หรือ Google Sheets</li><li>สื่อสารได้ดี สามารถทำงานร่วมกับทีม Data และ Tech ได้อย่างมีประสิทธิภาพ</li><li><b>หากเขียน Python ได้จะพิจารณาเป็นพิเศษ</b></li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่จะได้รับ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ประสบการณ์ลงมือปฏิบัติจริงในการตรวจจับการหลอกลวงออนไลน์ (Real-world Fraud Detection)</li><li>มีส่วนร่วมในการสร้างเทคโนโลยี Trust & Safety เพื่อปกป้องผู้ใช้งานในวงกว้าง</li><li>เรียนรู้การทำงานแบบ Cross-functional ร่วมกับทีมผู้เชี่ยวชาญด้าน Data และ Tech</li></ul>"
             },
             "Threat Intelligence Intern": {
                 type: "Internship (3 Months)", location: "Hybrid / Remote",
-                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>วิจัยและติดตามภัยคุกคามใหม่ๆ (Scams/Phishing)</li></ul>"
+                desc: "<p>ร่วมทีมข่าวกรองไซเบอร์เพื่อติดตามและวิเคราะห์ภัยคุกคามที่เกิดขึ้นใหม่ ไม่ว่าจะเป็นการหลอกลวงออนไลน์หรือวิศวกรรมสังคม เพื่อสร้างเกราะป้องกันที่เท่าทันเหตุการณ์ให้กับผู้ใช้งาน</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>วิจัย ติดตาม และวิเคราะห์ภัยคุกคามไซเบอร์ที่เกิดขึ้นใหม่ เช่น การหลอกลวงออนไลน์ (Scams) และ Phishing</li><li>ตรวจสอบและระบุรูปแบบกิจกรรมหลอกลวงจากข้อมูลที่น่าสงสัย (หมายเลขโทรศัพท์, URL, รูปภาพ)</li><li>มีส่วนร่วมในการพัฒนาฐานข้อมูลการข่าวกรองภัยคุกคามให้เป็นระบบเพื่อใช้สนับสนุนทีมเทคนิค</li><li>สนับสนุนการฝึกฝนโมเดล AI ด้วยข้อมูลที่ผ่านการติดป้ายกำกับ และจัดทำรายงานสรุปภัยคุกคามที่ชัดเจน</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>กำลังศึกษาหรือจบใหม่ในสาขา Cybersecurity, IT, Computer Science หรือสาขาที่เกี่ยวข้อง</li><li>มีความเข้าใจพื้นฐานด้านความปลอดภัยทางไซเบอร์ และระบบเครือข่าย (IP, DNS, HTTP/HTTPS)</li><li>มีทักษะการสืบค้นข้อมูล วิเคราะห์อย่างเป็นระบบ มีความละเอียดรอบคอบ และจดจำรูปแบบ (Pattern Recognition) ได้ดี</li><li><b>พิจารณาเป็นพิเศษ:</b> หากคุ้นเคยกับเครื่องมือ OSINT (เช่น VirusTotal) หรือมีพื้นฐาน Python / Scripting</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่จะได้รับ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>พัฒนาทักษะการข่าวกรองและการตรวจจับการหลอกลวงออนไลน์ผ่านการลงมือปฏิบัติจริงในระบบ</li><li>มีส่วนร่วมในโครงการที่ช่วยเสริมสร้างความรอบรู้ทางดิจิทัล (Digital Literacy) และป้องกันภัยคุกคามให้สังคม</li><li>เรียนรู้การทำงานแบบข้ามสายงาน (Cross-functional) ร่วมกับทีม Product, Data และ Tech</li></ul>"
             },
-            "UX/UI Design Intern": {
+          "UX/UI Design Intern": {
                 type: "Internship (3 Months)", location: "Hybrid / Remote",
-                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ออกแบบ UX/UI แพลตฟอร์มความปลอดภัยให้ใช้งานง่าย</li></ul>"
+                desc: "<p>ร่วมเปลี่ยนโลกไซเบอร์ที่ซับซ้อนให้กลายเป็นเรื่อง 'ง่าย' สำหรับทุกคน ผ่านการออกแบบประสบการณ์ผู้ใช้ (UX/UI) บนแพลตฟอร์มป้องกันการโกงออนไลน์และระบบส่งเสริมความรู้ด้านดิจิทัล</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> ออกแบบประสบการณ์การใช้งานบนแพลตฟอร์มให้ใช้งานง่ายและตอบโจทย์ผู้ใช้ (User-Centered Design)</li><li> สร้างสรรค์หน้าตาแอปพลิเคชัน (Interface) และเส้นทางการใช้งานที่คลีน สวยงาม และทันสมัย</li><li> ออกแบบระบบที่รองรับการใช้งานในทุกอุปกรณ์ด้วยแนวคิด Mobile-first</li><li> นำผลการทดสอบจากผู้ใช้งานมาปรับปรุงหน้าตาแอปเพื่อให้ใช้งานได้ง่ายและสะดวกที่สุด</li><li> ดูแลความถูกต้องและรักษาความสม่ำเสมอของงานออกแบบ (Visual Consistency) ในทุกส่วนของผลิตภัณฑ์</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>กำลังศึกษาหรือจบใหม่ในสาขา UX/UI Design, Interaction Design หรือสาขาที่เกี่ยวข้อง</li><li>มีความเข้าใจพื้นฐานเรื่อง User-Centered Design และหลักการด้าน Usability</li><li>คุ้นเคยกับเครื่องมือออกแบบ เช่น Figma หรือ Adobe XD</li><li>มีความละเอียดรอบคอบ และสามารถถ่ายทอดฟีเจอร์ที่ซับซ้อนออกมาเป็นดีไซน์ที่เข้าใจง่าย</li><li><b>พิจารณาเป็นพิเศษ:</b> หากมีพื้นฐาน HTML/CSS หรือความรู้ด้าน Frontend</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่จะได้รับ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>พัฒนาทักษะด้านความปลอดภัยไซเบอร์และการตรวจจับการหลอกลวงผ่านการลงมือทำจริง</li><li>เป็นส่วนหนึ่งของการสร้างเทคโนโลยีที่เน้นความเชื่อมั่น (Trust & Safety) เพื่อปกป้องผู้ใช้งาน</li><li>ประสบการณ์ทำงานแบบ Cross-functional ร่วมกับทีม Product, Data และ Tech</li></ul>"
             },
             "Event Planning Intern": {
                 type: "Internship (3 Months)", location: "Hybrid / Remote",
-                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ร่วมออกแบบแนวคิดกิจกรรม (Workshop, Product Launch)</li></ul>"
+                desc: "<p>สายกิจกรรมห้ามพลาด! ร่วมเป็นส่วนหนึ่งในการจัดอีเวนต์ทั้งออนไลน์และออฟไลน์ ตั้งแต่แนวคิดงาน (Concept) ประสานงานพาร์ทเนอร์ ไปจนถึงการรันหน้างานจริงเพื่อสร้างประสบการณ์ที่ดีที่สุดให้กับผู้เข้าร่วม</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> ร่วมออกแบบแนวคิดและรูปแบบงานอีเวนต์ (เวิร์คช็อป, งานเปิดตัวผลิตภัณฑ์)</li><li> ติดต่อประสานงานกับพาร์ทเนอร์ ซัพพลายเออร์ และสถานที่จัดงานเพื่อให้งานดำเนินไปอย่างราบรื่น</li><li> สนับสนุนการจัดการหน้างาน แก้ไขปัญหาเฉพาะหน้า และดูแลความเรียบร้อยรวมของกิจกรรม</li><li> ช่วยโปรโมทกิจกรรมผ่านช่องทางต่างๆ เพื่อดึงดูดกลุ่มเป้าหมายให้มาร่วมงาน</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>กำลังศึกษาหรือจบใหม่ในสาขาการจัดการ, การตลาด, นิเทศศาสตร์ หรือที่เกี่ยวข้อง</li><li>มีทักษะการสื่อสารและการจัดการเวลาที่ดีเยี่ยม (Time Management)</li><li>มีความคิดสร้างสรรค์ ชอบความท้าทาย และสามารถแก้ปัญหาเฉพาะหน้าได้ดี</li><li>คุ้นเคยกับการใช้ Google Workspace หรือ Microsoft Office</li><li><b>หากเคยมีประสบการณ์จัดกิจกรรมในมหาวิทยาลัยหรืออีเวนต์ข้างนอกจะพิจารณาเป็นพิเศษ</b></li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่จะได้รับ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> ลงมือวางแผนและจัดอีเวนต์จริง ตั้งแต่ต้นจนจบโปรเจกต์ (End-to-End)</li><li> พัฒนาทักษะการทำงานร่วมกับทีมหลายฝ่าย ทั้งทีม Tech, Design และ Sales</li><li> ได้สร้างผลงานการจัดอีเวนต์จริงเพื่อต่อยอดในอนาคต</li></ul>"
             },
-            "Marketing Intern": {
+         "Marketing Intern": {
                 type: "Internship (3 Months)", location: "Hybrid / Remote",
-                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>สร้างสรรค์ Content และวางกลยุทธ์ Social Media</li></ul>"
-            }
+                desc: "<p>นักปั้นแบรนด์รุ่นใหม่! มาร่วมวางแผนและปั้นคอนเทนต์สุดสร้างสรรค์ เพื่อสร้างการรับรู้ (Awareness) และขยายฐานผู้ใช้งานโซลูชัน Cybersecurity และ AI ของเราให้เข้าถึงกลุ่มเป้าหมายในวงกว้าง</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> สนับสนุนการวางแผนกลยุทธ์การตลาดออนไลน์และสร้างสรรค์คอนเทนต์ (เขียน, ออกแบบ, วิดีโอ) เพื่อเพิ่ม Reach และ Engagement</li><li> มีส่วนร่วมในการดำเนินแคมเปญการตลาดและดูแลช่องทาง Social Media ขององค์กร</li><li> ช่วยวิเคราะห์ข้อมูลหลังบ้านและวัดผลประสิทธิภาพของแคมเปญเพื่อนำมาปรับปรุงให้ดียิ่งขึ้น</li><li>ติดตามเทรนด์การตลาดและเทคโนโลยีใหม่ๆ เพื่อนำมาประยุกต์ใช้กับแบรนด์</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>กำลังศึกษาหรือจบใหม่ในสาขาการตลาด, บริหารธุรกิจ, นิเทศศาสตร์ หรือที่เกี่ยวข้อง</li><li>มีความเข้าใจพื้นฐานด้าน Digital Marketing (Social Media, Content Marketing, SEO)</li><li>มีทักษะการสร้าง Content เบื้องต้น และสามารถใช้เครื่องมืออย่าง Canva หรือโปรแกรมออกแบบได้</li><li>ชอบการวิเคราะห์ มีความคิดสร้างสรรค์ และเท่าทันกระแสการตลาดอยู่เสมอ</li><li> หากใช้ Google Analytics, Meta Business Suite หรือโปรแกรมตระกูล Adobe ได้จะพิจารณาเป็นพิเศษ</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่จะได้รับ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ประสบการณ์ลงมือทำแคมเปญจริงในธุรกิจ B2B Tech Company</li><li> เรียนรู้วิธีการทำงานกับข้อมูลและการวัดผลทางการตลาดอย่างเป็นระบบ</li><li> พัฒนาทักษะการเล่าเรื่อง (Storytelling) และการสร้างแบรนด์ให้แข็งแกร่ง</li><li>โอกาสร่วมงานและเรียนรู้จากทีม Product, Data และ Tech</li></ul>"
+            },
         };
 
+        // ตรวจสอบว่ามีชื่อตำแหน่งส่งมาใน URL ไหม
         if (role) {
+            jdTitle.textContent = role;
+            formRoleDisplay.textContent = `Applying for: ${role}`;
+            hiddenRoleInput.value = role;
+
+            // ดึงข้อมูลจากฐานข้อมูลด้านบนมาแสดง
             const data = jobData[role];
             if (data) {
-                jdTitle.textContent = role;
-                formRoleDisplay.textContent = `Applying for: ${role}`;
-                hiddenRoleInput.value = role;
                 jdType.textContent = data.type;
                 jdLocation.textContent = data.location;
                 jdContent.innerHTML = data.desc;
+            } else {
+                // ถ้าหาชื่อไม่เจอ (เช่น พิมพ์ URL เอง)
+                jdType.textContent = "General";
+                jdLocation.textContent = "Bangkok";
+                jdContent.innerHTML = "<p>โปรดระบุตำแหน่งที่คุณสนใจในแบบฟอร์ม หรือแนบ CV เพื่อให้เราพิจารณาตำแหน่งที่เหมาะสมให้กับคุณ</p>";
             }
         }
 
-        // ส่วนของการส่งฟอร์ม (Fetch API + ป้องกันการคลิกซ้ำ)
+        // ✅ ฟังก์ชันส่ง Form ไปที่ Forminit ด้วย Fetch API
         const form = document.getElementById('applicationForm');
         const submitBtn = document.getElementById('submitBtn');
 
         if (form) {
             form.addEventListener('submit', async (e) => {
-                e.preventDefault(); // ป้องกันการเปลี่ยนหน้าแบบปกติ
+                e.preventDefault(); // กันการรีเฟรชหน้า
                 
                 const formData = new FormData(form);
                 
-                // เปลี่ยนสถานะปุ่ม
+                // แจ้งสถานะกำลังโหลด
                 submitBtn.textContent = 'Sending Application...';
                 submitBtn.disabled = true;
                 submitBtn.style.opacity = '0.5';
@@ -172,7 +183,7 @@ import Container from '../components/Container.astro';
                     });
 
                     if (response.ok) {
-                        // ส่งสำเร็จ วิ่งไปหน้า Thank you ของ Forminit
+                        // ส่งสำเร็จ พาไปหน้าขอบคุณ
                         window.location.href = 'https://forminit.com/thank-you'; 
                     } else {
                         const result = await response.json();
@@ -184,7 +195,7 @@ import Container from '../components/Container.astro';
                         submitBtn.style.cursor = 'pointer';
                     }
                 } catch (error) {
-                    alert('Failed to send application. Please try again.');
+                    alert('Failed to send application. Please check your internet connection.');
                     // คืนสถานะปุ่ม
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Submit Application';
