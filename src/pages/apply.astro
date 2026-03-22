@@ -4,80 +4,157 @@ import Container from '../components/Container.astro';
 ---
 
 <Layout title="Apply Now | GrowUpward 2026">
-  <main class="bg-[#0a0a0a] min-h-screen text-white flex items-center justify-center py-20 relative overflow-hidden">
+  <main class="bg-[#0a0a0a] min-h-screen text-white pt-32 pb-20 relative overflow-hidden">
     
     <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 
     <Container>
-        <div class="max-w-xl mx-auto bg-white/[0.02] border border-white/10 p-8 md:p-12 rounded-[2rem] shadow-2xl relative z-10 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
             
-            <div class="text-center mb-10">
-                <a href="/join" class="text-gray-500 hover:text-white text-xs uppercase tracking-widest transition-colors mb-6 inline-block">
+            <div class="w-full lg:w-1/2 flex flex-col pt-4">
+                <a href="/join" class="text-gray-500 hover:text-white text-xs uppercase tracking-widest transition-colors mb-10 inline-block w-fit">
                     ← Back to Careers
                 </a>
-                <h1 class="text-3xl font-black uppercase tracking-widest text-white mb-2 mt-4">Submit Application</h1>
-                <p id="job-title-display" class="text-cyan-400 text-sm tracking-widest uppercase font-bold">
-                    Loading Role...
-                </p>
+
+                <h1 id="jd-title" class="text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-6 leading-tight">
+                    General Application
+                </h1>
+                
+                <div class="flex items-center gap-3 mb-10">
+                    <span id="jd-type" class="px-4 py-1.5 bg-white/10 text-gray-300 text-[10px] uppercase tracking-widest rounded-full font-bold">...</span>
+                    <span id="jd-location" class="px-4 py-1.5 bg-white/10 text-gray-300 text-[10px] uppercase tracking-widest rounded-full font-bold">...</span>
+                </div>
+
+                <div id="jd-content" class="text-gray-400 text-sm md:text-base leading-relaxed space-y-6">
+                    <p>กำลังโหลดรายละเอียดงาน...</p>
+                </div>
             </div>
 
-            <form id="application-form" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-2">
-                        <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">First Name (ชื่อ)</label>
-                        <input type="text" name="firstName" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-400 outline-none transition text-sm" />
+            <div class="w-full lg:w-1/2 bg-white/[0.02] border border-white/10 p-8 md:p-12 rounded-[2rem] shadow-2xl relative z-10 backdrop-blur-sm mt-8 lg:mt-0">
+                
+                <div class="text-center mb-10">
+                    <h2 class="text-2xl font-black uppercase tracking-widest text-white mb-2">Submit Application</h2>
+                    <p id="form-role-display" class="text-cyan-400 text-xs tracking-widest uppercase font-bold">
+                        Applying for: General Application
+                    </p>
+                </div>
+
+                <form action="YOUR_GETFORM_URL" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    <input type="hidden" name="appliedPosition" id="hidden-role" value="General Application" />
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">First Name (ชื่อ)</label>
+                            <input type="text" name="firstName" required class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-cyan-400 outline-none transition text-sm shadow-inner" />
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Last Name (นามสกุล)</label>
+                            <input type="text" name="lastName" required class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-cyan-400 outline-none transition text-sm shadow-inner" />
+                        </div>
                     </div>
+
                     <div class="space-y-2">
-                        <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Last Name (นามสกุล)</label>
-                        <input type="text" name="lastName" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-400 outline-none transition text-sm" />
+                        <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Email Address (อีเมล)</label>
+                        <input type="email" name="email" required class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-cyan-400 outline-none transition text-sm shadow-inner" />
                     </div>
-                </div>
 
-                <div class="space-y-2">
-                    <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Email Address (อีเมล)</label>
-                    <input type="email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-400 outline-none transition text-sm" />
-                </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Phone Number (เบอร์ติดต่อ)</label>
+                        <input type="tel" name="phone" required class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-cyan-400 outline-none transition text-sm shadow-inner" />
+                    </div>
 
-                <div class="space-y-2">
-                    <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Phone Number (เบอร์ติดต่อ)</label>
-                    <input type="tel" name="phone" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-400 outline-none transition text-sm" />
-                </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Upload CV (PDF Only)</label>
+                        <input type="file" name="cv" accept=".pdf" required class="block w-full text-sm text-gray-400 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-cyan-400 file:text-black hover:file:bg-white cursor-pointer transition-all border border-white/10 rounded-xl bg-[#0a0a0a]" />
+                    </div>
 
-                <div class="space-y-2">
-                    <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Upload CV (PDF Only)</label>
-                    <input type="file" name="cv" accept=".pdf" required class="block w-full text-sm text-gray-400 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-cyan-400 file:text-black hover:file:bg-white cursor-pointer transition-all border border-white/10 rounded-xl bg-white/5" />
-                </div>
+                    <button type="submit" class="w-full py-4 mt-8 bg-cyan-400 hover:bg-white text-black font-black rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+                        Submit Application
+                    </button>
+                </form>
 
-                <button type="submit" class="w-full py-4 mt-8 bg-cyan-400 hover:bg-white text-black font-black rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
-                    Submit Application
-                </button>
-            </form>
-
+            </div>
         </div>
     </Container>
   </main>
 
-  <script>
+  <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
-        // ดึงพารามิเตอร์ ?role= ออกมาจาก URL
         const params = new URLSearchParams(window.location.search);
         const role = params.get('role');
-        const display = document.getElementById('job-title-display');
-        
-        // เอาชื่อตำแหน่งมาแสดงให้ผู้สมัครเห็น
-        if (role && display) {
-            display.textContent = `Applying for: ${role}`;
-        } else if (display) {
-            display.textContent = "General Application";
-        }
 
-        // ป้องกันการ Refresh หน้าเว็บเวลาที่ยังไม่ได้ต่อ Backend
-        const form = document.getElementById('application-form');
-        if(form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('ระบบกำลังอยู่ในช่วงทดสอบ (โปรดเชื่อมต่อ Backend ในภายหลัง)');
-            });
+        const jdTitle = document.getElementById('jd-title');
+        const jdType = document.getElementById('jd-type');
+        const jdLocation = document.getElementById('jd-location');
+        const jdContent = document.getElementById('jd-content');
+        const formRoleDisplay = document.getElementById('form-role-display');
+        const hiddenRoleInput = document.getElementById('hidden-role');
+
+        // 📝 ฐานข้อมูลรายละเอียดงานทั้ง 10 ตำแหน่ง
+        const jobData = {
+            // --- FULL-TIME ---
+            "Cybersecurity & PDPA Consultant": {
+                type: "Full-time", location: "Bangkok (Hybrid)",
+                desc: "<p>ในฐานะ Consultant หลัก คุณจะเป็นเสาหลักผู้วางรากฐานความน่าเชื่อถือให้กับลูกค้า พร้อมออกแบบเนื้อหาเชิงกลยุทธ์สำหรับ Cybersecurity Board Game และ AI Platform ของเรา</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่ต้องรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ให้คำปรึกษาด้าน Cybersecurity และ PDPA แก่ลูกค้า B2B</li><li>ตรวจประเมิน (Audit) ให้เป็นไปตามมาตรฐานสากล</li><li>ร่วมพัฒนา Knowledge Base สำหรับเทรน AI Chatbot</li></ul>"
+            },
+            "B2B Tech Solutions Sales": {
+                type: "Full-time", location: "Bangkok (Hybrid)",
+                desc: "<p>มือขวาฝั่งธุรกิจ นักล่าโปรเจกต์และยอดขาย! หน้าที่ของคุณคือการนำโซลูชันด้านความปลอดภัย (CaaS และ Board Game) ไปนำเสนอให้ลูกค้าองค์กรเพื่อสร้างการเติบโตอย่างก้าวกระโดด</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่ต้องรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ค้นหาและเข้าถึงกลุ่มลูกค้าองค์กรเป้าหมายใหม่ๆ</li><li>นำเสนอบริการ เจรจาต่อรอง และปิดการขาย</li><li>สร้างและรักษาความสัมพันธ์ที่ดีกับลูกค้าในระยะยาว</li></ul>"
+            },
+            "Lead AI / Full-Stack Engineer": {
+                type: "Full-time", location: "Bangkok (Hybrid)",
+                desc: "<p>สถาปนิกหลักที่จะต่อท่อ API จากโมเดลระดับโลก มาสร้างเป็นโซลูชันตรวจจับ Fraud และระบบจำลองสถานการณ์การโจมตีทางไซเบอร์สำหรับองค์กรไทย</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่ต้องรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>วางโครงสร้างระบบและพัฒนา AI Chatbot แบบ RAG</li><li>พัฒนา Simulation Platform เพื่อจำลองการโจมตีทางไซเบอร์</li><li>ดูแลสถาปัตยกรรมระบบโดยรวมและเป็น Mentor ให้ทีมนักศึกษาฝึกงาน</li></ul>"
+            },
+            "Penetration Tester / Ethical Hacker": {
+                type: "Full-time", location: "Bangkok (Hybrid)",
+                desc: "<p>ผู้คุมด่านความปลอดภัย หน้าที่ของคุณคือสวมบทบาทแฮกเกอร์เพื่อทดสอบและค้นหาช่องโหว่ในระบบของลูกค้า รวมถึงช่วยออกแบบด่านจำลองการโจมตีให้สมจริงในแพลตฟอร์มของเรา</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่ต้องรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ทำ Vulnerability Assessment และ Penetration Testing</li><li>จัดทำรายงานสรุปช่องโหว่พร้อมข้อเสนอแนะในการแก้ไข</li><li>ร่วมออกแบบสถานการณ์จำลอง (Scenario) สำหรับ Simulation Platform</li></ul>"
+            },
+
+            // --- INTERNSHIPS ---
+            "AI / Machine Learning Intern": {
+                type: "Internship", location: "Remote",
+                desc: "<p>มาร่วมเรียนรู้และลงมือทำจริงในการปรับจูนและฝึกสอน (Fine-tune) โมเดล AI เพื่อให้สามารถตรวจจับการโกงและวิเคราะห์ภัยคุกคามทางไซเบอร์ได้แม่นยำยิ่งขึ้น</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่คุณจะได้เรียนรู้</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>การทำ RAG (Retrieval-Augmented Generation)</li><li>การจัดการและเตรียมข้อมูลสำหรับ AI</li><li>การทำงานร่วมกับ Lead Engineer ในโปรเจกต์ระดับองค์กร</li></ul>"
+            },
+            "Cybersecurity Analyst Intern": {
+                type: "Internship", location: "Remote",
+                desc: "<p>หน่วยวิเคราะห์ข้อมูล! คุณจะได้ช่วยคัดแยกและติดป้ายกำกับ (Data Labeling) เคสการโกงจริงๆ เพื่อนำไปใช้เป็นฐานข้อมูลในการเทรน AI ของเราให้ฉลาดขึ้น</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่คุณจะได้เรียนรู้</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>วิเคราะห์แพทเทิร์นของมิจฉาชีพและการโจมตีรูปแบบต่างๆ</li><li>พื้นฐานการทำ Threat Intelligence และ Data Classification</li></ul>"
+            },
+            "Threat Intelligence Intern": {
+                type: "Internship", location: "Remote",
+                desc: "<p>หน่วยข่าวกรองไซเบอร์! หน้าที่ของคุณคือติดตามแกะรอยมุกใหม่ๆ ของแก๊งคอลเซ็นเตอร์และมิจฉาชีพ เพื่อนำข้อมูลมาอัปเดตเข้าระบบและสร้างด่านจำลองที่ทันเหตุการณ์ที่สุด</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่คุณจะได้เรียนรู้</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>เทคนิคการทำ OSINT (Open Source Intelligence)</li><li>การรายงานสรุปภัยคุกคามที่เกิดขึ้นใหม่ในไทยและภูมิภาค</li></ul>"
+            },
+            "UX/UI Design Intern": {
+                type: "Internship", location: "Remote",
+                desc: "<p>เปลี่ยนเรื่อง Security ที่เข้าใจยาก ให้กลายเป็นแพลตฟอร์มและแอปพลิเคชันที่ใช้งานง่าย สวยงาม และดึงดูดใจผู้ใช้งาน ทั้งในส่วนของ Chatbot และ Simulation Platform</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่คุณจะได้เรียนรู้</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>การออกแบบ User Flow สำหรับแอปพลิเคชันสาย Tech</li><li>การใช้ Figma สร้าง Prototype เพื่อทดสอบกับผู้ใช้งานจริง</li></ul>"
+            },
+            "Event Planning Intern": {
+                type: "Internship", location: "Remote",
+                desc: "<p>สายจัดกิจกรรมห้ามพลาด! คุณจะได้เป็นส่วนหนึ่งในการประสานงาน วางแผน และรันอีเวนต์เวิร์คช็อป รวมถึงการโปรโมทบอร์ดเกม Cybersecurity ตามองค์กรต่างๆ</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่คุณจะได้เรียนรู้</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>การบริหารจัดการโปรเจกต์และอีเวนต์ B2B</li><li>ทักษะการแก้ปัญหาเฉพาะหน้าและการประสานงาน</li></ul>"
+            },
+            "Marketing Intern": {
+                type: "Internship", location: "Remote",
+                desc: "<p>นักปั้นแบรนด์! เข้ามาช่วยเราสร้างสรรค์คอนเทนต์ วางแผนแคมเปญการตลาด และกระจายข่าวสารเกี่ยวกับโซลูชันความปลอดภัยของเราให้เข้าถึงกลุ่มเป้าหมายในวงกว้าง</p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่คุณจะได้เรียนรู้</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>กลยุทธ์การตลาดสำหรับ B2B Tech Startup</li><li>การทำ Content Marketing และจัดการ Social Media</li></ul>"
+            }
+        };
+
+        // ตรวจสอบว่ามีชื่อตำแหน่งส่งมาใน URL ไหม
+        if (role) {
+            jdTitle.textContent = role;
+            formRoleDisplay.textContent = `Applying for: ${role}`;
+            hiddenRoleInput.value = role;
+
+            // ดึงข้อมูลจากฐานข้อมูลด้านบนมาแสดง
+            const data = jobData[role];
+            if (data) {
+                jdType.textContent = data.type;
+                jdLocation.textContent = data.location;
+                jdContent.innerHTML = data.desc;
+            } else {
+                // ถ้าหาชื่อไม่เจอ (เช่น พิมพ์ URL เอง)
+                jdType.textContent = "General";
+                jdLocation.textContent = "Bangkok";
+                jdContent.innerHTML = "<p>โปรดระบุตำแหน่งที่คุณสนใจในแบบฟอร์ม หรือแนบ CV เพื่อให้เราพิจารณาตำแหน่งที่เหมาะสมให้กับคุณ</p>";
+            }
         }
     });
   </script>
