@@ -12,8 +12,9 @@ import "./../tailus.css"
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <meta name="description" content="Template built with tailwindcss using Tailus blocks v2" />
-        <title>Tailus astro theme</title>
+        <meta name="description" content="GrowUpward - Protect security: a fundamental human necessity" />
+        
+        <title>GrowUpward 2026</title>
 
         <AstroFont
             config={[
@@ -23,9 +24,18 @@ import "./../tailus.css"
                     preload: true,
                     display: "swap",
                     selector: "html",
-                    fallback: "sans-serif",
+                    // จุดสำคัญ: สั่งให้ถ้าไม่มีภาษาไทย ให้สลับไปใช้ Prompt แทน
+                    fallback: "'Prompt', sans-serif", 
                     googleFontsURL: 'https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap',
                 },
+                // โหลดฟอนต์ Prompt ของ Google เข้ามาเพิ่มสำหรับภาษาไทย
+                {
+                    src: [],
+                    name: "Prompt",
+                    preload: true,
+                    display: "swap",
+                    googleFontsURL: 'https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;700&display=swap',
+                }
             ]}
         />
     </head>
