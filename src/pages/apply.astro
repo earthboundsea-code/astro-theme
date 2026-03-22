@@ -147,3 +147,16 @@ import Container from '../components/Container.astro';
     });
   </script>
 </Layout>
+<script is:inline>
+  const form = document.querySelector('form');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', () => {
+    // เปลี่ยนข้อความบนปุ่มให้รู้ว่ากำลังส่ง
+    submitBtn.textContent = 'Sending...';
+    // ปิดการใช้งานปุ่มทันทีเพื่อป้องกันการกดซ้ำ
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.5';
+    submitBtn.style.cursor = 'not-allowed';
+  });
+</script>
