@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/Container.astro';
 
-// ข้อมูลตำแหน่งงาน
+// ข้อมูลตำแหน่งงาน 10 ตำแหน่งตามที่คุณระบุ
 const jobs = [
     // --- Full-time Positions ---
     { title: "Cybersecurity & PDPA Consultant", city: "Bangkok (Hybrid)", type: "Full-time", status: "เริ่มรับสมัครเดือน 4", hot: true },
@@ -30,24 +30,15 @@ const jobs = [
         </div>
         
         <div class="relative z-10 max-w-5xl mx-auto text-center px-4">
-            <h1 class="text-4xl md:text-5xl font-light tracking-[0.3em] text-white/90 uppercase mb-2">
-                GROW
-            </h1>
-            <h2 class="text-7xl md:text-[110px] font-black tracking-tighter leading-[0.8] uppercase text-cyan-400 mb-6">
-                WITH US
-            </h2>
-            
+            <h1 class="text-4xl md:text-5xl font-light tracking-[0.3em] text-white/90 uppercase mb-2">GROW</h1>
+            <h2 class="text-7xl md:text-[110px] font-black tracking-tighter leading-[0.8] uppercase text-cyan-400 mb-6">WITH US</h2>
             <p class="text-[10px] md:text-sm text-gray-400 tracking-[0.15em] uppercase font-medium max-w-2xl mx-auto mb-12">
                 Join our mission to protect security: a fundamental human necessity
             </p>
             
             <div class="max-w-md mx-auto relative group mb-16 md:mb-24 mt-4">
                 <div class="absolute -inset-1 bg-cyan-400/20 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                <input 
-                  type="text" 
-                  placeholder="ค้นหาตำแหน่งงาน..." 
-                  class="relative w-full bg-white/5 border border-white/10 backdrop-blur-md rounded-full py-4 px-8 outline-none focus:border-cyan-400/50 transition text-sm text-white placeholder:text-gray-500" 
-                />
+                <input type="text" placeholder="ค้นหาตำแหน่งงาน..." class="relative w-full bg-white/5 border border-white/10 backdrop-blur-md rounded-full py-4 px-8 outline-none focus:border-cyan-400/50 transition text-sm text-white placeholder:text-gray-500" />
                 <button class="absolute right-6 top-1/2 -translate-y-1/2 text-cyan-400 hover:scale-110 transition-transform">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -57,93 +48,57 @@ const jobs = [
         </div>
     </section>
 
-    <section class="pt-4 pb-20 relative">
+    <section class="py-24 border-t border-white/5 bg-[#0a0a0a]">
         <Container>
-            <div class="flex flex-col items-center">
-                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-cyan-400/50 mb-10 italic">Why GrowUpward</h2>
-                
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center w-full max-w-5xl mx-auto mt-4">
-                    <div class="space-y-4 group flex flex-col items-center">
-                        <div class="text-4xl md:text-5xl opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:-translate-y-2">
-                            💡
-                        </div>
-                        <h3 class="font-bold text-xs md:text-sm uppercase tracking-widest text-white mt-4">Creativity First</h3>
-                        <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed max-w-[220px]">
-                            เราเปิดกว้างให้คุณใช้ความคิดสร้างสรรค์แก้ปัญหาไซเบอร์ในมุมที่ต่างออกไป
-                        </p>
-                    </div>
-                    <div class="space-y-4 group flex flex-col items-center">
-                        <div class="text-4xl md:text-5xl opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:-translate-y-2">
-                            🌍
-                        </div>
-                        <h3 class="font-bold text-xs md:text-sm uppercase tracking-widest text-white mt-4">Global Network</h3>
-                        <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed max-w-[220px]">
-                            เชื่อมต่อกับเครือข่ายคนเก่งระดับสากล เพื่อร่วมกันสร้างโซลูชันความปลอดภัยที่ส่งผลกระทบไปทั่วโลก
-                        </p>
-                    </div>
-                    <div class="space-y-4 group flex flex-col items-center">
-                        <div class="text-4xl md:text-5xl opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:-translate-y-2">
-                            📈
-                        </div>
-                        <h3 class="font-bold text-xs md:text-sm uppercase tracking-widest text-white mt-4">Growth Mindset</h3>
-                        <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed max-w-[220px]">
-                            เราเชื่อในการเรียนรู้ตลอดเวลา พร้อมซัพพอร์ตพื้นที่ให้คุณกล้าทดลอง ล้มให้ไว และเติบโตไปพร้อมกัน
-                        </p>
-                    </div>
-                    <div class="space-y-4 group flex flex-col items-center">
-                        <div class="text-4xl md:text-5xl opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:-translate-y-2">
-                            😊
-                        </div>
-                        <h3 class="font-bold text-xs md:text-sm uppercase tracking-widest text-white mt-4">Work as Play</h3>
-                        <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed max-w-[220px]">
-                            งานสำคัญไม่จำเป็นต้องเครียดเสมอไป เราเน้นความยืดหยุ่นและผลลัพธ์ เพื่อให้คุณสนุกกับสิ่งที่ทำได้เต็มที่
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </Container>
-    </section>
-
-    <section class="py-24 border-t border-white/5 bg-white/[0.01]">
-        <Container>
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+            <div class="max-w-4xl mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 flex items-center gap-4 text-white">
                     Open Positions
                     <span class="h-px flex-1 bg-white/5"></span>
                 </h2>
 
                 <div class="space-y-4">
                     {jobs.map((job) => (
-                        <div class="p-6 bg-white/5 border border-white/5 rounded-2xl hover:border-cyan-400/30 transition-all duration-500 flex flex-col md:flex-row justify-between items-center gap-6 group">
+                        <div class="p-6 bg-white/[0.03] border border-white/10 rounded-2xl hover:border-cyan-400/30 transition-all duration-500 flex flex-col md:flex-row justify-between items-center gap-6 group">
                             <div class="text-center md:text-left">
-                                <h4 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">
+                                <h4 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors flex flex-wrap items-center justify-center md:justify-start gap-3">
                                     {job.title}
-                                    {job.hot && <span class="ml-2 text-[8px] bg-red-500/80 text-white px-2 py-0.5 rounded italic uppercase">Urgent</span>}
+                                    <span class={`text-[9px] px-2 py-1 rounded italic uppercase tracking-widest font-black ${job.status.includes('เดือน 4') ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-400/30' : 'bg-white/10 text-gray-400'}`}>
+                                        {job.status}
+                                    </span>
                                 </h4>
-                                <p class="text-xs text-gray-500 mt-1 uppercase tracking-widest">{job.city} • {job.type}</p>
+                                <div class="flex items-center gap-3 mt-2 justify-center md:justify-start">
+                                    <span class="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-medium">{job.city}</span>
+                                    <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
+                                    <span class="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-medium">{job.type}</span>
+                                </div>
                             </div>
-                            <a href="#apply" class="px-8 py-2 border border-white/10 hover:border-cyan-400 hover:text-cyan-400 rounded-full text-sm font-bold transition-all">
+                            
+                            <a href="#apply" class="px-8 py-2 bg-white/5 border border-white/10 hover:bg-cyan-400 hover:text-black hover:border-cyan-400 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300">
                                 Apply
                             </a>
                         </div>
                     ))}
                 </div>
+
+                <p class="text-center text-gray-600 text-[10px] mt-12 uppercase tracking-[0.3em] italic font-medium">
+                    * ALL INTERNSHIP POSITIONS ARE REMOTE-FIRST
+                </p>
             </div>
         </Container>
     </section>
 
-    <section id="apply" class="py-32">
+    <section id="apply" class="py-32 bg-white/[0.01]">
         <Container>
             <div class="max-w-2xl mx-auto bg-white/5 border border-white/10 p-10 md:p-16 rounded-[2.5rem] shadow-2xl">
                 <h3 class="text-2xl font-bold mb-10 text-center uppercase tracking-widest italic">Submit Application</h3>
-                <form action="https://formspree.io/f/YOUR_ID" method="POST" enctype="multipart/form-data" class="space-y-6">
-                    <input type="text" name="name" required placeholder="Full Name" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition" />
-                    <input type="email" name="email" required placeholder="Email Address" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition" />
-                    <select name="position" class="w-full bg-[#0a0a0a] border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition font-bold uppercase text-xs">
+                <form class="space-y-6">
+                    <input type="text" required placeholder="Full Name" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition" />
+                    <input type="email" required placeholder="Email Address" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition" />
+                    <select class="w-full bg-[#0a0a0a] border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition font-bold uppercase text-xs">
                         {jobs.map(job => <option value={job.title}>{job.title}</option>)}
                     </select>
-                    <input type="file" name="cv" accept=".pdf" required class="block w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-cyan-400 file:text-black cursor-pointer" />
-                    <textarea name="message" rows="4" placeholder="Message..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition resize-none"></textarea>
+                    <input type="file" accept=".pdf" required class="block w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-cyan-400 file:text-black cursor-pointer" />
+                    <textarea rows="4" placeholder="Message..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-cyan-400 outline-none transition resize-none"></textarea>
                     <button type="submit" class="w-full py-4 bg-cyan-400 hover:bg-white text-black font-black rounded-full transition-all duration-300 uppercase tracking-widest text-sm">
                         Submit
                     </button>
