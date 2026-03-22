@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/Container.astro';
+---
+
+<Layout title="Apply Now | GrowUpward 2026">
+  <main class="bg-[#0a0a0a] min-h-screen text-white flex items-center justify-center py-20 relative overflow-hidden">
+    
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <Container>
+        <div class="max-w-xl mx-auto bg-white/[0.02] border border-white/10 p-8 md:p-12 rounded-[2rem] shadow-2xl relative z-10 backdrop-blur-sm">
+            
+            <div class="text-center mb-10">
+                <a href="/join" class="text-gray-500 hover:text-white text-xs uppercase tracking-widest transition-colors mb-6 inline-block">
+                    ← Back to Careers
+                </a>
+                <h1 class="text-3xl font-black uppercase tracking-widest text-white mb-2 mt-4">Submit Application</h1>
+                <p id="job-title-display" class="text-cyan-400 text-sm tracking-widest uppercase font-bold">
+                    Loading Role...
+                </p>
+            </div>
+
+            <form id="application-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">First Name (ชื่อ)</label>
+                        <input type="text" name="firstName" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-400 outline-none transition text-sm" />
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Last Name (นามสกุล)</label>
+                        <input type="text" name="lastName" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-400 outline-none transition text-sm" />
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Email Address (อีเมล)</label>
+                    <input type="email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-400 outline-none transition text-sm" />
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Phone Number (เบอร์ติดต่อ)</label>
+                    <input type="tel" name="phone" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-cyan-400 outline-none transition text-sm" />
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Upload CV (PDF Only)</label>
+                    <input type="file" name="cv" accept=".pdf" required class="block w-full text-sm text-gray-400 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-cyan-400 file:text-black hover:file:bg-white cursor-pointer transition-all border border-white/10 rounded-xl bg-white/5" />
+                </div>
+
+                <button type="submit" class="w-full py-4 mt-8 bg-cyan-400 hover:bg-white text-black font-black rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+                    Submit Application
+                </button>
+            </form>
+
+        </div>
+    </Container>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // ดึงพารามิเตอร์ ?role= ออกมาจาก URL
+        const params = new URLSearchParams(window.location.search);
+        const role = params.get('role');
+        const display = document.getElementById('job-title-display');
+        
+        // เอาชื่อตำแหน่งมาแสดงให้ผู้สมัครเห็น
+        if (role && display) {
+            display.textContent = `Applying for: ${role}`;
+        } else if (display) {
+            display.textContent = "General Application";
+        }
+
+        // ป้องกันการ Refresh หน้าเว็บเวลาที่ยังไม่ได้ต่อ Backend
+        const form = document.getElementById('application-form');
+        if(form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('ระบบกำลังอยู่ในช่วงทดสอบ (โปรดเชื่อมต่อ Backend ในภายหลัง)');
+            });
+        }
+    });
+  </script>
+</Layout>
