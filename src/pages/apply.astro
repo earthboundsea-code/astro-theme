@@ -39,17 +39,17 @@ import Container from '../components/Container.astro';
                     </p>
                 </div>
 
-                <form action="https://forminit.com/f/fjyf1064yed" method="POST" enctype="multipart/form-data" class="space-y-6">
-                    <input type="hidden" name="appliedPosition" id="hidden-role" value="General Application" />
+                <form id="applicationForm" action="https://forminit.com/f/fjyf1064yed" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    <input type="hidden" name="applied_position" id="hidden-role" value="General Application" />
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">First Name (ชื่อ)</label>
-                            <input type="text" name="firstName" required class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-cyan-400 outline-none transition text-sm shadow-inner" />
+                            <input type="text" name="first_name" required class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-cyan-400 outline-none transition text-sm shadow-inner" />
                         </div>
                         <div class="space-y-2">
                             <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Last Name (นามสกุล)</label>
-                            <input type="text" name="lastName" required class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-cyan-400 outline-none transition text-sm shadow-inner" />
+                            <input type="text" name="last_name" required class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-4 text-white focus:border-cyan-400 outline-none transition text-sm shadow-inner" />
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@ import Container from '../components/Container.astro';
                         <input type="file" name="file" accept=".pdf" required class="block w-full text-sm text-gray-400 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-cyan-400 file:text-black hover:file:bg-white cursor-pointer transition-all border border-white/10 rounded-xl bg-[#0a0a0a]" />
                     </div>
 
-                    <button type="submit" class="w-full py-4 mt-8 bg-cyan-400 hover:bg-white text-black font-black rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+                    <button type="submit" id="submitBtn" class="w-full py-4 mt-8 bg-cyan-400 hover:bg-white text-black font-black rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
                         Submit Application
                     </button>
                 </form>
@@ -80,6 +80,7 @@ import Container from '../components/Container.astro';
 
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
+        // ส่วนจัดการข้อมูลรายละเอียดงาน
         const params = new URLSearchParams(window.location.search);
         const role = params.get('role');
 
@@ -144,19 +145,54 @@ import Container from '../components/Container.astro';
                 jdContent.innerHTML = data.desc;
             }
         }
+
+        // ส่วนของการส่งฟอร์ม (Fetch API + ป้องกันการคลิกซ้ำ)
+        const form = document.getElementById('applicationForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault(); // ป้องกันการเปลี่ยนหน้าแบบปกติ
+                
+                const formData = new FormData(form);
+                
+                // เปลี่ยนสถานะปุ่ม
+                submitBtn.textContent = 'Sending Application...';
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.5';
+                submitBtn.style.cursor = 'not-allowed';
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // ส่งสำเร็จ วิ่งไปหน้า Thank you ของ Forminit
+                        window.location.href = 'https://forminit.com/thank-you'; 
+                    } else {
+                        const result = await response.json();
+                        alert('Error: ' + (result.message || 'Something went wrong.'));
+                        // คืนสถานะปุ่ม
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Submit Application';
+                        submitBtn.style.opacity = '1';
+                        submitBtn.style.cursor = 'pointer';
+                    }
+                } catch (error) {
+                    alert('Failed to send application. Please try again.');
+                    // คืนสถานะปุ่ม
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit Application';
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.cursor = 'pointer';
+                }
+            });
+        }
     });
   </script>
 </Layout>
-<script is:inline>
-  const form = document.querySelector('form');
-  const submitBtn = form.querySelector('button[type="submit"]');
-
-  form.addEventListener('submit', () => {
-    // เปลี่ยนข้อความบนปุ่มให้รู้ว่ากำลังส่ง
-    submitBtn.textContent = 'Sending...';
-    // ปิดการใช้งานปุ่มทันทีเพื่อป้องกันการกดซ้ำ
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.5';
-    submitBtn.style.cursor = 'not-allowed';
-  });
-</script>
