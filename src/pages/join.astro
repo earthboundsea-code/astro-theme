@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/Container.astro';
 
-// ข้อมูลตำแหน่งงาน 10 ตำแหน่งตามที่คุณระบุ
+// อัปเดตข้อมูลตำแหน่งงานใหม่ 10 ตำแหน่งตามที่คุณระบุ
 const jobs = [
     // --- Full-time Positions ---
     { title: "Cybersecurity & PDPA Consultant", city: "Bangkok (Hybrid)", type: "Full-time", status: "เริ่มรับสมัครเดือน 4", hot: true },
@@ -48,6 +48,36 @@ const jobs = [
         </div>
     </section>
 
+    <section class="pt-4 pb-20 relative">
+        <Container>
+            <div class="flex flex-col items-center">
+                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-cyan-400/50 mb-10 italic">Why GrowUpward</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center w-full max-w-5xl mx-auto mt-4">
+                    <div class="space-y-4 group flex flex-col items-center">
+                        <div class="text-4xl md:text-5xl opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:-translate-y-2">💡</div>
+                        <h3 class="font-bold text-xs md:text-sm uppercase tracking-widest text-white mt-4">Creativity First</h3>
+                        <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed max-w-[220px]">เราเปิดกว้างให้คุณใช้ความคิดสร้างสรรค์แก้ปัญหาไซเบอร์ในมุมที่ต่างออกไป</p>
+                    </div>
+                    <div class="space-y-4 group flex flex-col items-center">
+                        <div class="text-4xl md:text-5xl opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:-translate-y-2">🌍</div>
+                        <h3 class="font-bold text-xs md:text-sm uppercase tracking-widest text-white mt-4">Global Network</h3>
+                        <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed max-w-[220px]">เชื่อมต่อกับเครือข่ายคนเก่งระดับสากล เพื่อร่วมกันสร้างโซลูชันความปลอดภัยที่ส่งผลกระทบไปทั่วโลก</p>
+                    </div>
+                    <div class="space-y-4 group flex flex-col items-center">
+                        <div class="text-4xl md:text-5xl opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:-translate-y-2">📈</div>
+                        <h3 class="font-bold text-xs md:text-sm uppercase tracking-widest text-white mt-4">Growth Mindset</h3>
+                        <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed max-w-[220px]">เราเชื่อในการเรียนรู้ตลอดเวลา พร้อมซัพพอร์ตพื้นที่ให้คุณกล้าทดลอง ล้มให้ไว และเติบโตไปพร้อมกัน</p>
+                    </div>
+                    <div class="space-y-4 group flex flex-col items-center">
+                        <div class="text-4xl md:text-5xl opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:-translate-y-2">😊</div>
+                        <h3 class="font-bold text-xs md:text-sm uppercase tracking-widest text-white mt-4">Work as Play</h3>
+                        <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed max-w-[220px]">งานสำคัญไม่จำเป็นต้องเครียดเสมอไป เราเน้นความยืดหยุ่นและผลลัพธ์ เพื่อให้คุณสนุกกับสิ่งที่ทำได้เต็มที่</p>
+                    </div>
+                </div>
+            </div>
+        </Container>
+    </section>
+
     <section class="py-24 border-t border-white/5 bg-[#0a0a0a]">
         <Container>
             <div class="max-w-4xl mx-auto px-4">
@@ -80,7 +110,7 @@ const jobs = [
                     ))}
                 </div>
 
-                <p class="text-center text-gray-600 text-[10px] mt-12 uppercase tracking-[0.3em] italic font-medium">
+                <p class="text-center text-gray-600 text-[10px] mt-12 uppercase tracking-[0.3em] italic">
                     * ALL INTERNSHIP POSITIONS ARE REMOTE-FIRST
                 </p>
             </div>
