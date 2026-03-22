@@ -1,8 +1,8 @@
----
+ ---
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/Container.astro';
 
-// อัปเดตข้อมูลตำแหน่งงานใหม่ 10 ตำแหน่งตามที่คุณระบุ
+// อัปเดตข้อมูลตำแหน่งงาน 10 ตำแหน่ง
 const jobs = [
     // --- Full-time Positions ---
     { title: "Cybersecurity & PDPA Consultant", city: "Bangkok (Hybrid)", type: "Full-time", status: "เริ่มรับสมัครเดือน 4", hot: true },
@@ -23,18 +23,20 @@ const jobs = [
 <Layout title="Careers | GrowUpward 2026">
   <main class="bg-[#0a0a0a] min-h-screen text-white">
 
-   <section class="relative pt-48 pb-4 flex flex-col items-center justify-center overflow-hidden">
+    <section class="relative pt-48 pb-4 flex flex-col items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-10" alt="Teamwork" />
             <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-[#0a0a0a]"></div>
         </div>
         
         <div class="relative z-10 max-w-5xl mx-auto text-center px-4">
-            
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.3] text-white mb-10 max-w-4xl mx-auto">
-                ร่วมภารกิจปกป้องความปลอดภัย <br class="hidden md:block" />
-                <span class="text-cyan-400">สิทธิขั้นพื้นฐานที่ทุกคนพึงมี</span>
+            <h1 class="text-xl md:text-3xl text-white tracking-[0.15em] uppercase font-light max-w-4xl mx-auto mb-4 leading-relaxed">
+                Join our mission to protect security: <br class="hidden md:block"/> a fundamental human necessity
             </h1>
+            
+            <h2 class="text-sm md:text-base text-cyan-400 tracking-wider font-medium max-w-2xl mx-auto mb-12">
+                ร่วมภารกิจกับเรา เพื่อปกป้องความปลอดภัย: ความจำเป็นขั้นพื้นฐานของมนุษยชาติ
+            </h2>
             
             <div class="max-w-md mx-auto relative group mb-8 md:mb-12 mt-4">
                 <div class="absolute -inset-1 bg-cyan-400/20 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
@@ -45,13 +47,13 @@ const jobs = [
                     </svg>
                 </button>
             </div>
-            
         </div>
     </section>
-    <section class="pt-4 pb-20 relative">
+
+    <section class="pt-0 pb-20 relative">
         <Container>
             <div class="flex flex-col items-center">
-                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-cyan-400/50 mb-10 italic">Why GrowUpward</h2>
+                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-cyan-400/50 mb-8 italic">Why GrowUpward</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center w-full max-w-5xl mx-auto mt-4">
                     <div class="space-y-4 group flex flex-col items-center">
                         <div class="text-4xl md:text-5xl opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:-translate-y-2">💡</div>
@@ -103,14 +105,14 @@ const jobs = [
                                 </div>
                             </div>
                             
-                          <a href={`/apply?role=${encodeURIComponent(job.title)}`} target="_blank" rel="noopener noreferrer" class="px-8 py-2 bg-white/5 border border-white/10 hover:bg-cyan-400 hover:text-black hover:border-cyan-400 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300">
-    APPLY
-</a>
+                            <a href={`/apply?role=${encodeURIComponent(job.title)}`} target="_blank" rel="noopener noreferrer" class="px-8 py-2 bg-white/5 border border-white/10 hover:bg-cyan-400 hover:text-black hover:border-cyan-400 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300">
+                                Apply
+                            </a>
                         </div>
                     ))}
                 </div>
-
-                <p class="text-center text-gray-600 text-[10px] mt-12 uppercase tracking-[0.3em] italic">
+                
+                <p class="text-center text-gray-600 text-[10px] mt-12 uppercase tracking-[0.3em] italic font-medium">
                     * ALL INTERNSHIP POSITIONS ARE REMOTE-FIRST
                 </p>
             </div>
