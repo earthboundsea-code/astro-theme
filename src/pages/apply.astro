@@ -157,51 +157,19 @@ import Container from '../components/Container.astro';
             }
         }
 
-        // ✅ ฟังก์ชันส่ง Form ไปที่ Forminit ด้วย Fetch API
+      // ✅ ฟังก์ชันส่ง Form (เปลี่ยนมาใช้ Native Submit ของ Browser แทน Fetch API)
         const form = document.getElementById('applicationForm');
         const submitBtn = document.getElementById('submitBtn');
 
         if (form) {
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault(); // กันการรีเฟรชหน้า
+            form.addEventListener('submit', () => {
+                // ⚠️ สำคัญมาก: เราเอา e.preventDefault() ออกไปแล้ว 
+                // เพื่อปล่อยให้ Browser หอบไฟล์และข้อมูลวิ่งไปหา Forminit โดยตรง
                 
-                const formData = new FormData(form);
-                
-                // แจ้งสถานะกำลังโหลด
+                // สิ่งที่เราทำคือแค่เปลี่ยนหน้าตาปุ่ม เพื่อกันไม่ให้ผู้สมัครกดส่งซ้ำ (Double Click)
                 submitBtn.textContent = 'Sending Application...';
-                submitBtn.disabled = true;
                 submitBtn.style.opacity = '0.5';
-                submitBtn.style.cursor = 'not-allowed';
-
-                try {
-                    const response = await fetch(form.action, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-
-                    if (response.ok) {
-                        // ส่งสำเร็จ พาไปหน้าขอบคุณ
-                        window.location.href = 'https://forminit.com/thank-you'; 
-                    } else {
-                        const result = await response.json();
-                        alert('Error: ' + (result.message || 'Something went wrong.'));
-                        // คืนสถานะปุ่ม
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Submit Application';
-                        submitBtn.style.opacity = '1';
-                        submitBtn.style.cursor = 'pointer';
-                    }
-                } catch (error) {
-                    alert('Failed to send application. Please check your internet connection.');
-                    // คืนสถานะปุ่ม
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Submit Application';
-                    submitBtn.style.opacity = '1';
-                    submitBtn.style.cursor = 'pointer';
-                }
+                submitBtn.style.pointerEvents = 'none'; // ล็อคปุ่มไม่ให้กดซ้ำ
             });
         }
     });
