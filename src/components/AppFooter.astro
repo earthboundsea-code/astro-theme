@@ -61,39 +61,45 @@ import Container from "./Container.astro";
 </footer>
 
 <script is:inline>
-  // ฟังก์ชันช่วยอ่านค่า Cookie
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+  // ฟังก์ชันช่วยอ่านค่า Cookie แบบแม่นยำ
+  function getLangCookie() {
+    const name = "googtrans=";
+    const ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i].trim();
+      if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+    }
+    return "";
   }
 
   function initLangSwitcher() {
     const switcher = document.getElementById('lang-switcher');
     if (!switcher) return;
 
-    // 1. ตรวจสอบว่าเคยแปลเป็นไทยไว้ไหม ถ้าใช่ ให้ตั้งค่า dropdown เป็น 'th'
-    const currentLang = getCookie('googtrans');
-    if (currentLang && currentLang.includes('th')) {
+    // 1. เช็คสถานะปัจจุบันจาก Cookie เพื่อให้ Dropdown แสดงค่าที่ถูกต้องหลังโหลดหน้า
+    const currentTrans = getLangCookie();
+    if (currentTrans.includes('/th')) {
       switcher.value = 'th';
+    } else {
+      switcher.value = 'en';
     }
 
-    // 2. ดักจับการเปลี่ยนภาษา
+    // 2. เมื่อมีการเปลี่ยนภาษา
     switcher.addEventListener('change', (e) => {
       const lang = e.target.value;
       if (window.changeLanguage) {
         window.changeLanguage(lang);
       } else {
-        // กรณีสคริปต์ใน Layout ยังโหลดไม่เสร็จ ให้รอ 1 วินาทีแล้วลองใหม่
-        console.log("Waiting for translation engine...");
-        setTimeout(() => {
-          if (window.changeLanguage) window.changeLanguage(lang);
-        }, 1000);
+        // Fallback กรณีฟังก์ชันใน Layout ยังไม่พร้อม (แต่ปกติควรพร้อมเพราะเราใช้ Cookie)
+        const langValue = `/en/${lang}`;
+        document.cookie = `googtrans=${langValue}; path=/`;
+        document.cookie = `googtrans=${langValue}; domain=${window.location.hostname}; path=/`;
+        window.location.reload();
       }
     });
   }
 
-  // รันทันทีและเผื่อเวลาไว้สำหรับความชัวร์
+  // ป้องกันปัญหาสคริปต์ทำงานก่อน DOM โหลดเสร็จ
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initLangSwitcher);
   } else {
