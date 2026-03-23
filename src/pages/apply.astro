@@ -214,30 +214,40 @@ import Container from '../components/Container.astro';
                 }
             });
         }
-
-        // ฟังก์ชันยิงข้อมูลไปหา Google Script
+// ฟังก์ชันยิงข้อมูลไปหา Google Script (เวอร์ชันปรับปรุง แก้บั๊ก & ดัก Error)
         async function sendToGoogle(payload) {
             try {
+                // ยิงข้อมูลไปหา Google แบบตรงไปตรงมา
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    body: JSON.stringify(payload),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' } // ใช้ text/plain เพื่อหลบ CORS Policy
+                    body: JSON.stringify(payload)
                 });
 
-                const result = await response.json();
+                // อ่านค่าที่ Google ตอบกลับมา
+                const text = await response.text(); 
                 
-                if (result.result === 'success') {
-                    statusMsg.textContent = "ส่งใบสมัครเรียบร้อยแล้ว! ขอบคุณครับ";
-                    statusMsg.className = "text-center text-xs mt-4 block text-green-400";
-                    alert("Application Submitted Successfully!");
-                    // 🎯 พอกด OK แล้วให้กลับไปหน้าแรก หรือหน้า Careers
-                    window.location.href = '/join'; 
-                } else {
-                    throw new Error(result.message);
+                try {
+                    const result = JSON.parse(text); // ลองแปลงเป็น JSON
+                    if (result.result === 'success') {
+                        statusMsg.textContent = "ส่งใบสมัครเรียบร้อยแล้ว! ขอบคุณครับ";
+                        statusMsg.className = "text-center text-xs mt-4 block text-green-400";
+                        alert("Application Submitted Successfully!");
+                        window.location.href = '/join'; 
+                    } else {
+                        // ถ้า Google ร้อง Error กลับมา
+                        throw new Error(result.message || "Google Script Error");
+                    }
+                } catch(e) {
+                    // ถ้าแปลง JSON ไม่ได้ แสดงว่าลิงก์ Apps Script ผิด หรือยังไม่ได้ Deploy แบบ Anyone
+                    console.log("Response from Google:", text);
+                    throw new Error("ระบบ Google ปฏิเสธการรับข้อมูล (โปรดตรวจสอบการ Deploy Apps Script ให้เป็น Anyone ครับ)");
                 }
+
             } catch (error) {
-                console.error(error);
-                alert("เกิดข้อผิดพลาดในการส่งใบสมัคร กรุณาลองใหม่อีกครั้งครับ");
+                console.error("Fetch Error:", error);
+                alert("เกิดข้อผิดพลาด: " + error.message);
+                
+                // คืนสถานะปุ่มให้กดใหม่ได้
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit Application';
                 submitBtn.style.opacity = '1';
