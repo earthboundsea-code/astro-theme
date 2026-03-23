@@ -6,245 +6,242 @@ import Container from '../components/Container.astro';
 <Layout title="About Us | GrowUpward 2026">
   <main class="bg-[#0a0a0a] min-h-screen text-white pt-32 pb-20 relative overflow-hidden">
     
-    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20 z-0"></div>
+    
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-cyan-600/20 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
     <Container>
-      
-      <div class="max-w-4xl mx-auto text-center pt-12 md:pt-20 mb-16">
-        <h1 class="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
-            Bridging <span class="text-cyan-400">Security</span> <br/>with Human Impact
-        </h1>
-        <p class="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
-            GrowUpward was founded in 2026 to confront the greatest challenges of our era: <br class="hidden md:block"/> 
-            <span class="text-white font-medium">The rapid advancement of AI and threats more complex than human intuition alone can handle.</span>
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
+      <div class="relative z-10">
         
-        <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] hover:border-cyan-400/50 transition-all duration-500 group">
-          <div class="w-12 h-12 bg-cyan-400 text-black flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">01</div>
-          <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-cyan-400">Anti-Scam Intelligence</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Our MVP ecosystem features real-time <span class="text-white font-medium">Scam Checkers</span>, advanced <span class="text-white font-medium">Deepfake Detection</span>, and Face Misuse Monitoring to intercept fraud at its source.
-          </p>
-        </div>
-
-        <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] hover:border-blue-500/50 transition-all duration-500 group">
-          <div class="w-12 h-12 bg-blue-500 text-white flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">02</div>
-          <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-blue-400">Cyber Resilience</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Strengthening your core through professional <span class="text-white font-medium">Penetration Testing (Pentest)</span> and rapid <span class="text-white font-medium">Incident Response (IR)</span> to ensure business continuity.
-          </p>
-        </div>
-
-        <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] hover:border-purple-500/50 transition-all duration-500 group">
-          <div class="w-12 h-12 bg-purple-500 text-white flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">03</div>
-          <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-purple-400">Human Risk Platform</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Eliminating the weakest link with <span class="text-white font-medium">Phishing Simulations</span>, Digital Literacy training, and a comprehensive <span class="text-white font-medium">Human Risk Score Dashboard</span>.
-          </p>
-        </div>
-
-        <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] hover:border-emerald-500/50 transition-all duration-500 group">
-          <div class="w-12 h-12 bg-emerald-500 text-white flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">04</div>
-          <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-emerald-400">PDPA Compliance</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Comprehensive <span class="text-white font-medium">PDPA Bundle</span> services including data mapping, privacy policy drafting, and legal tech consulting.
-          </p>
-        </div>
-
-        <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] hover:border-orange-500/50 transition-all duration-500 group">
-          <div class="w-12 h-12 bg-orange-500 text-white flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">05</div>
-          <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-orange-400">Industrial IoT & OT</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Securing the production line with <span class="text-white font-medium">Factory Device Security</span>, real-time <span class="text-white font-medium">Network Monitoring (OT)</span>, and technical Risk Assessments.
-          </p>
-        </div>
-
-        <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] hover:border-amber-500/50 transition-all duration-500 group">
-          <div class="w-12 h-12 bg-amber-500 text-black flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">06</div>
-          <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-amber-400">Secure Hardware</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            The professional standard for high-performance hardware, engineered to secure <span class="text-white font-medium">corporate assets</span> and protect <span class="text-white font-medium">confidential workspaces</span>.
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">Security Keys</span>
-            <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">Data Diodes</span>
-            <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">Faraday</span>
-            <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">Data Blockers</span>
-            <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">Mic-Locks</span>
-            <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">VPN Routers</span>
-            <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">AI Hubs</span>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="mb-32">
-        <div class="max-w-4xl mx-auto text-center mb-16">
-          <span class="px-4 py-1.5 bg-emerald-400/10 text-emerald-400 text-[10px] uppercase tracking-[0.2em] rounded-full font-bold border border-emerald-400/20 mb-6 inline-block">
-            Trusted by Leaders
-          </span>
-          <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tight leading-[0.9] mb-8">
-            <span class="text-gray-500">Membership</span> & Partner
-          </h2>
+        <div class="max-w-4xl mx-auto text-center pt-12 md:pt-20 mb-16">
+          <h1 class="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
+              Bridging <span class="text-cyan-400">Security</span> <br/>with Human Impact
+          </h1>
           <p class="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
-            GrowUpward is affiliated with and supported by the most rigorous governmental and industrial bodies. <br class="hidden md:block"/> 
-            These partnerships solidify our commitment to an absolute standard of defense.
+              GrowUpward was founded in 2026 to confront the greatest challenges of our era: <br class="hidden md:block"/> 
+              <span class="text-white font-medium">The rapid advancement of AI and threats more complex than human intuition alone can handle.</span>
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
           
-          <div class="p-6 md:p-10 bg-white/[0.02] border border-white/10 rounded-[2.5rem] flex items-center justify-center group hover:bg-white/[0.04] transition-all duration-300 aspect-square md:aspect-auto md:h-64">
-            <img src="/isc2.png" alt="ISC2" class="h-32 md:h-44 w-auto object-contain group-hover:scale-110 transition-transform duration-500" />
+          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] backdrop-blur-md hover:border-cyan-400/50 transition-all duration-500 group shadow-lg">
+            <div class="w-12 h-12 bg-cyan-400 text-black flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">01</div>
+            <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-cyan-400">Anti-Scam Intelligence</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Our MVP ecosystem features real-time <span class="text-white font-medium">Scam Checkers</span>, advanced <span class="text-white font-medium">Deepfake Detection</span>, and Face Misuse Monitoring to intercept fraud at its source.
+            </p>
           </div>
-          
-          <div class="p-6 md:p-10 bg-white/[0.02] border border-white/10 rounded-[2.5rem] flex items-center justify-center group hover:bg-white/[0.04] transition-all duration-300 aspect-square md:aspect-auto md:h-64">
-            <img src="/police.jpg" alt="Cyber Crime Bureau" class="h-32 md:h-44 w-auto object-contain group-hover:scale-110 transition-transform duration-500" />
+
+          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] backdrop-blur-md hover:border-blue-500/50 transition-all duration-500 group shadow-lg">
+            <div class="w-12 h-12 bg-blue-500 text-white flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">02</div>
+            <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-blue-400">Cyber Resilience</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Strengthening your core through professional <span class="text-white font-medium">Penetration Testing (Pentest)</span> and rapid <span class="text-white font-medium">Incident Response (IR)</span> to ensure business continuity.
+            </p>
           </div>
-          
-          <div class="p-6 md:p-10 bg-white/[0.02] border border-white/10 rounded-[2.5rem] flex items-center justify-center group hover:bg-white/[0.04] transition-all duration-300 aspect-square md:aspect-auto md:h-64">
-            <img src="/mdes.png" alt="MDES" class="h-32 md:h-44 w-auto object-contain group-hover:scale-110 transition-transform duration-500" />
+
+          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] backdrop-blur-md hover:border-purple-500/50 transition-all duration-500 group shadow-lg">
+            <div class="w-12 h-12 bg-purple-500 text-white flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">03</div>
+            <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-purple-400">Human Risk Platform</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Eliminating the weakest link with <span class="text-white font-medium">Phishing Simulations</span>, Digital Literacy training, and a comprehensive <span class="text-white font-medium">Human Risk Score Dashboard</span>.
+            </p>
           </div>
-          
-          <div class="p-6 md:p-10 bg-white/[0.02] border border-white/10 rounded-[2.5rem] flex items-center justify-center group hover:bg-white/[0.04] transition-all duration-300 aspect-square md:aspect-auto md:h-64">
-            <img src="/guanxi.jpg" alt="European Guanxi" class="h-32 md:h-44 w-auto object-contain group-hover:scale-110 transition-transform duration-500 rounded-2xl" />
+
+          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] backdrop-blur-md hover:border-emerald-500/50 transition-all duration-500 group shadow-lg">
+            <div class="w-12 h-12 bg-emerald-500 text-white flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">04</div>
+            <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-emerald-400">PDPA Compliance</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Comprehensive <span class="text-white font-medium">PDPA Bundle</span> services including data mapping, privacy policy drafting, and legal tech consulting.
+            </p>
+          </div>
+
+          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] backdrop-blur-md hover:border-orange-500/50 transition-all duration-500 group shadow-lg">
+            <div class="w-12 h-12 bg-orange-500 text-white flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">05</div>
+            <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-orange-400">Industrial IoT & OT</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Securing the production line with <span class="text-white font-medium">Factory Device Security</span>, real-time <span class="text-white font-medium">Network Monitoring (OT)</span>, and technical Risk Assessments.
+            </p>
+          </div>
+
+          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] backdrop-blur-md hover:border-amber-500/50 transition-all duration-500 group shadow-lg">
+            <div class="w-12 h-12 bg-amber-500 text-black flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">06</div>
+            <h3 class="text-xl font-bold uppercase tracking-widest mb-4 text-amber-400">Secure Hardware</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              The professional standard for high-performance hardware, engineered to secure <span class="text-white font-medium">corporate assets</span> and protect <span class="text-white font-medium">confidential workspaces</span>.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">Security Keys</span>
+              <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">Data Diodes</span>
+              <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">Faraday</span>
+              <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">Data Blockers</span>
+              <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">Mic-Locks</span>
+              <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">VPN Routers</span>
+              <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] text-gray-300 uppercase font-bold tracking-wider">AI Hubs</span>
+            </div>
           </div>
 
         </div>
-      </div>
 
-      <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-32 mb-32">
-        <div class="w-full lg:w-1/2 relative">
-            <div class="aspect-square bg-gradient-to-tr from-cyan-950 to-[#0a0a0a] border border-white/10 rounded-[3rem] overflow-hidden flex items-center justify-center group">
-                <div class="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Vision Art" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-50 group-hover:opacity-100" />
-            </div>
-            <div class="absolute -bottom-6 -right-6 bg-white text-black p-8 rounded-[2rem] hidden md:block shadow-2xl">
-                <p class="text-4xl font-black italic">"Innovation for All"</p>
-            </div>
-        </div>
-
-    <div class="w-full lg:w-1/2 space-y-8">
-            <h2 class="text-3xl font-black uppercase tracking-tight">
-                Not Just Another Tech Startup. <br/> <span class="text-gray-500">We Build Resilience.</span>
+        <div class="mb-32">
+          <div class="max-w-4xl mx-auto text-center mb-16">
+            <span class="px-4 py-1.5 bg-emerald-400/10 text-emerald-400 text-[10px] uppercase tracking-[0.2em] rounded-full font-bold border border-emerald-400/20 mb-6 inline-block">
+              Trusted by Leaders
+            </span>
+            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tight leading-[0.9] mb-8">
+              <span class="text-gray-500">Membership</span> & Partner
             </h2>
-            <div class="space-y-6 text-gray-400 font-light leading-relaxed text-sm md:text-base">
-                <p>
-                    At <span class="text-white font-bold tracking-widest uppercase">GrowUpward</span>, we believe that great technology should work silently in the background, yet speak loudly through its social impact.
-                </p>
-                <p>
-                    Our mission is to bridge cutting-edge innovation with human understanding. We don't just build software; we are building an <span class="text-white font-medium italic">"Ecosystem of Trust"</span> where everyone can advance safely and grow upward with confidence.
-                </p>
+            <p class="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
+              GrowUpward is affiliated with and supported by the most rigorous governmental and industrial bodies. <br class="hidden md:block"/> 
+              These partnerships solidify our commitment to an absolute standard of defense.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            <div class="p-6 md:p-10 bg-white/[0.02] border border-white/10 rounded-[2.5rem] backdrop-blur-md flex items-center justify-center group hover:bg-white/[0.04] transition-all duration-300 aspect-square md:aspect-auto md:h-64 shadow-lg">
+              <img src="/isc2.png" alt="ISC2" class="h-32 md:h-44 w-auto object-contain group-hover:scale-110 transition-transform duration-500" />
             </div>
+            <div class="p-6 md:p-10 bg-white/[0.02] border border-white/10 rounded-[2.5rem] backdrop-blur-md flex items-center justify-center group hover:bg-white/[0.04] transition-all duration-300 aspect-square md:aspect-auto md:h-64 shadow-lg">
+              <img src="/police.jpg" alt="Cyber Crime Bureau" class="h-32 md:h-44 w-auto object-contain group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div class="p-6 md:p-10 bg-white/[0.02] border border-white/10 rounded-[2.5rem] backdrop-blur-md flex items-center justify-center group hover:bg-white/[0.04] transition-all duration-300 aspect-square md:aspect-auto md:h-64 shadow-lg">
+              <img src="/mdes.png" alt="MDES" class="h-32 md:h-44 w-auto object-contain group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div class="p-6 md:p-10 bg-white/[0.02] border border-white/10 rounded-[2.5rem] backdrop-blur-md flex items-center justify-center group hover:bg-white/[0.04] transition-all duration-300 aspect-square md:aspect-auto md:h-64 shadow-lg">
+              <img src="/guanxi.jpg" alt="European Guanxi" class="h-32 md:h-44 w-auto object-contain group-hover:scale-110 transition-transform duration-500 rounded-2xl" />
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-32 mb-32">
+          <div class="w-full lg:w-1/2 relative">
+              <div class="aspect-square bg-gradient-to-tr from-cyan-950 to-[#0a0a0a] border border-white/10 rounded-[3rem] overflow-hidden flex items-center justify-center group shadow-2xl">
+                  <div class="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Vision Art" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-50 group-hover:opacity-100" />
+              </div>
+              <div class="absolute -bottom-6 -right-6 bg-white text-black p-8 rounded-[2rem] hidden md:block shadow-2xl">
+                  <p class="text-4xl font-black italic">"Innovation for All"</p>
+              </div>
+          </div>
+
+          <div class="w-full lg:w-1/2 space-y-8">
+              <h2 class="text-3xl font-black uppercase tracking-tight">
+                  Not Just Another Tech Startup. <br/> <span class="text-gray-500">We Build Resilience.</span>
+              </h2>
+              <div class="space-y-6 text-gray-400 font-light leading-relaxed text-sm md:text-base">
+                  <p>
+                      At <span class="text-white font-bold tracking-widest uppercase">GrowUpward</span>, we believe that great technology should work silently in the background, yet speak loudly through its social impact.
+                  </p>
+                  <p>
+                      Our mission is to bridge cutting-edge innovation with human understanding. We don't just build software; we are building an <span class="text-white font-medium italic">"Ecosystem of Trust"</span> where everyone can advance safely and grow upward with confidence.
+                  </p>
+              </div>
+              
+              <div class="pt-8 flex flex-wrap gap-4">
+                  <a href="/order" class="px-8 py-4 bg-white text-black font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-cyan-400 transition-all active:scale-95 shadow-xl hover:shadow-cyan-400/20">
+                      Join Our Mission
+                  </a>
+                  <div class="flex items-center gap-4 px-6 py-4 border border-white/10 rounded-2xl backdrop-blur-md">
+                      <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                      <span class="text-[10px] uppercase tracking-widest font-bold">Scaling Phase 2026</span>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="mb-16">
+          <div class="max-w-4xl mx-auto text-center mb-16">
+            <span class="px-4 py-1.5 bg-blue-500/10 text-blue-400 text-[10px] uppercase tracking-[0.2em] rounded-full font-bold border border-blue-500/20 mb-6 inline-block">
+              Our Focus
+            </span>
+            <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight mb-8">
+              <span class="text-white">Key</span> 
+              <span class="text-gray-500">Industries</span>
+            </h2>
+            <p class="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
+              Delivering specialized defense mechanisms for the most critical sectors driving the Thai economy forward.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             
-            <div class="pt-8 flex flex-wrap gap-4">
-                <a href="/order" class="px-8 py-4 bg-white text-black font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-cyan-400 transition-all active:scale-95 shadow-xl hover:shadow-cyan-400/20">
-                    Join Our Mission
-                </a>
-                <div class="flex items-center gap-4 px-6 py-4 border border-white/10 rounded-2xl">
-                    <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-                    <span class="text-[10px] uppercase tracking-widest font-bold">Scaling Phase 2026</span>
-                </div>
+            <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] backdrop-blur-md hover:bg-white/[0.04] hover:border-cyan-400/30 transition-all duration-300 group shadow-lg">
+              <div class="text-cyan-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Finance & Banking</h4>
+              <p class="text-sm text-gray-500 leading-relaxed">
+                Protecting transactions with Anti-Scam intelligence and ensuring absolute PDPA compliance.
+              </p>
             </div>
+
+            <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] backdrop-blur-md hover:bg-white/[0.04] hover:border-orange-400/30 transition-all duration-300 group shadow-lg">
+              <div class="text-orange-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Smart Manufacturing</h4>
+              <p class="text-sm text-gray-500 leading-relaxed">
+                Securing factory production lines and EEC infrastructure through robust Industrial IoT monitoring.
+              </p>
+            </div>
+
+            <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] backdrop-blur-md hover:bg-white/[0.04] hover:border-blue-400/30 transition-all duration-300 group shadow-lg">
+              <div class="text-blue-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.315 48.315 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Public Sector</h4>
+              <p class="text-sm text-gray-500 leading-relaxed">
+                Fortifying national cybersecurity frameworks and government databases with enterprise-grade resilience.
+              </p>
+            </div>
+
+            <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] backdrop-blur-md hover:bg-white/[0.04] hover:border-emerald-400/30 transition-all duration-300 group shadow-lg">
+              <div class="text-emerald-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Healthcare</h4>
+              <p class="text-sm text-gray-500 leading-relaxed">
+                Safeguarding sensitive patient data and medical records through comprehensive Human Risk training.
+              </p>
+            </div>
+
+            <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] backdrop-blur-md hover:bg-white/[0.04] hover:border-purple-400/30 transition-all duration-300 group shadow-lg">
+              <div class="text-purple-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Retail & E-commerce</h4>
+              <p class="text-sm text-gray-500 leading-relaxed">
+                Protecting high-volume online transactions, live commerce, and expansive customer databases.
+              </p>
+            </div>
+
+            <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] backdrop-blur-md hover:bg-white/[0.04] hover:border-indigo-400/30 transition-all duration-300 group shadow-lg">
+              <div class="text-indigo-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84a51.39 51.39 0 00-2.658.814m-15.482 0l4.858 1.246c.883.227 1.769.343 2.624.343m7.141-1.39l-4.858 1.246A12.656 12.656 0 0012 11.624" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Education & EdTech</h4>
+              <p class="text-sm text-gray-500 leading-relaxed">
+                Securing academic networks, student privacy, and intellectual property from emerging cyber threats.
+              </p>
+            </div>
+
+          </div>
         </div>
+        
       </div>
-
-   <div class="mb-16">
-        <div class="max-w-4xl mx-auto text-center mb-16">
-          <span class="px-4 py-1.5 bg-blue-500/10 text-blue-400 text-[10px] uppercase tracking-[0.2em] rounded-full font-bold border border-blue-500/20 mb-6 inline-block">
-            Our Focus
-          </span>
-          <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight mb-8">
-            <span class="text-white">Key</span> 
-            <span class="text-gray-500">Industries</span>
-          </h2>
-          <p class="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
-            Delivering specialized defense mechanisms for the most critical sectors driving the Thai economy forward.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          
-          
-          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] hover:bg-white/[0.04] hover:border-cyan-400/30 transition-all duration-300 group">
-            <div class="text-cyan-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Finance & Banking</h4>
-            <p class="text-sm text-gray-500 leading-relaxed">
-              Protecting transactions with Anti-Scam intelligence and ensuring absolute PDPA compliance.
-            </p>
-          </div>
-
-          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] hover:bg-white/[0.04] hover:border-orange-400/30 transition-all duration-300 group">
-            <div class="text-orange-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-              </svg>
-            </div>
-            <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Smart Manufacturing</h4>
-            <p class="text-sm text-gray-500 leading-relaxed">
-              Securing factory production lines and EEC infrastructure through robust Industrial IoT monitoring.
-            </p>
-          </div>
-
-          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] hover:bg-white/[0.04] hover:border-blue-400/30 transition-all duration-300 group">
-            <div class="text-blue-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.315 48.315 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-              </svg>
-            </div>
-            <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Public Sector</h4>
-            <p class="text-sm text-gray-500 leading-relaxed">
-              Fortifying national cybersecurity frameworks and government databases with enterprise-grade resilience.
-            </p>
-          </div>
-
-          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] hover:bg-white/[0.04] hover:border-emerald-400/30 transition-all duration-300 group">
-            <div class="text-emerald-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-              </svg>
-            </div>
-            <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Healthcare</h4>
-            <p class="text-sm text-gray-500 leading-relaxed">
-              Safeguarding sensitive patient data and medical records through comprehensive Human Risk training.
-            </p>
-          </div>
-
-          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] hover:bg-white/[0.04] hover:border-purple-400/30 transition-all duration-300 group">
-            <div class="text-purple-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-              </svg>
-            </div>
-            <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Retail & E-commerce</h4>
-            <p class="text-sm text-gray-500 leading-relaxed">
-              Protecting high-volume online transactions, live commerce, and expansive customer databases.
-            </p>
-          </div>
-
-          <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2rem] hover:bg-white/[0.04] hover:border-indigo-400/30 transition-all duration-300 group">
-            <div class="text-indigo-400 mb-6 opacity-70 group-hover:opacity-100 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84a51.39 51.39 0 00-2.658.814m-15.482 0l4.858 1.246c.883.227 1.769.343 2.624.343m7.141-1.39l-4.858 1.246A12.656 12.656 0 0012 11.624" />
-              </svg>
-            </div>
-            <h4 class="text-lg font-bold uppercase tracking-wider text-white mb-2">Education & EdTech</h4>
-            <p class="text-sm text-gray-500 leading-relaxed">
-              Securing academic networks, student privacy, and intellectual property from emerging cyber threats.
-            </p>
-          </div>
-
-        </div>
-      </div>
-
     </Container>
   </main>
 </Layout>
