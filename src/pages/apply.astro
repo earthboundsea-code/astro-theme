@@ -71,7 +71,7 @@ import Container from '../components/Container.astro';
                     <button type="submit" id="submitBtn" class="w-full py-4 mt-8 bg-cyan-400 hover:bg-white text-black font-black rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
                         Submit Application
                     </button>
-
+                    
                     <p id="statusMsg" class="text-center text-xs mt-4 hidden"></p>
                 </form>
 
@@ -92,18 +92,17 @@ import Container from '../components/Container.astro';
         const formRoleDisplay = document.getElementById('form-role-display');
         const hiddenRoleInput = document.getElementById('hidden-role');
 
-        // 📝 ฐานข้อมูลรายละเอียดงานทั้ง 10 ตำแหน่ง (คงเดิม 100%)
+        // 📝 ฐานข้อมูลรายละเอียดงานทั้ง 10 ตำแหน่ง
         const jobData = {
-            // --- FULL-TIME ---
-           "Cybersecurity & PDPA Consultant": {
+            "Cybersecurity & PDPA Consultant": {
                 type: "Full-time", location: "Bangkok (Hybrid)",
                 desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ให้คำปรึกษาด้าน Cybersecurity และ PDPA แก่ลูกค้า B2B ตรวจประเมิน (Audit) ให้เป็นไปตามมาตรฐานสากล</li><li>พัฒนาและวางระบบ PDPA รวมถึงจัดทำ Data Mapping, ร่างนโยบายความเป็นส่วนตัว และให้คำปรึกษาด้านการจัดการข้อมูลให้ถูกต้องตามกฎหมาย</li><li>ออกแบบและนำนโยบายด้านความปลอดภัยทางไซเบอร์ไปปฏิบัติใช้ พร้อมดูแลสถาปัตยกรรมความปลอดภัยสำหรับ Web Application, Database และระบบ Cloud</li><li>ดำเนินการประเมินความเสี่ยงด้านไอที (IT Risk Assessment) ค้นหาช่องโหว่ และจัดทำรายงานเพื่อสนับสนุนการตรวจสอบระบบ (IT Audit) จากทั้งภายในและภายนอก</li><li>เฝ้าระวังและตอบสนองต่อเหตุการณ์ละเมิดความปลอดภัยทางไซเบอร์ (Incident Response) พร้อมเสนอแนะและควบคุมดูแลกลยุทธ์ในการลดความเสี่ยง</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>วุฒิปริญญาตรีในสาขา Cybersecurity, Computer Engineering, IT, นิติศาสตร์ หรือสาขาที่เกี่ยวข้อง</li><li>มีความเข้าใจในหลักการของกฎหมาย PDPA ของไทย และมีความสนใจในมาตรฐานความปลอดภัยสากล (เช่น ISO 27001 หรือ NIST)</li><li>มีความรู้พื้นฐานด้าน Network, Cloud Computing (AWS/Azure/GCP) หรือความปลอดภัยของระบบจากการเรียนหรือการฝึกงาน และพร้อมที่จะเรียนรู้การใช้เครื่องมือความปลอดภัยใหม่ๆ</li><li>พิจารณาเป็นพิเศษ: หากเคยผ่านการฝึกงานในสายงานที่เกี่ยวข้อง, เคยแข่งขันด้าน Cybersecurity (เช่น CTF), หรือมีใบรับรองพื้นฐาน เช่น CompTIA Security+, Google Cybersecurity Certificate หรือ AZ-500</li></ul>"
             },
-           "B2B Tech Solutions Sales": {
+            "B2B Tech Solutions Sales": {
                 type: "Full-time (Junior)", location: "Bangkok (Hybrid)",
                 desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ค้นหาและขยายฐานลูกค้าองค์กร (B2B) พร้อมวางแผนกลยุทธ์การขายเพื่อให้บรรลุเป้าหมาย</li><li> เข้าพบลูกค้า นำเสนอ และสาธิตโซลูชัน (Product Demo) อย่างมืออาชีพ</li><li> วิเคราะห์ความต้องการของลูกค้า และนำเสนอเทคโนโลยีที่เหมาะสมที่สุด</li><li> ดูแลกระบวนการขายตั้งแต่เริ่มต้นจนปิดการขาย รวมถึงการติดตามผลอย่างต่อเนื่อง</li><li> สร้างความสัมพันธ์ระยะยาวกับลูกค้า และประสานงานกับทีมภายใน พร้อมบันทึกข้อมูลในระบบ CRM</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ปริญญาตรีด้านบริหารธุรกิจ การตลาด ไอที หรือสาขาที่เกี่ยวข้อง </li><li>มีทักษะการสื่อสาร การนำเสนอ และการเจรจาต่อรองที่ดี</li><li>มีความมุ่งมั่นด้านงานขาย ชอบความท้าทาย และพร้อมรับมือกับการปฏิเสธ</li><li>สามารถอธิบายโซลูชันทางเทคนิคให้เข้าใจง่ายในเชิงธุรกิจ</li><li><b>พิจารณาเป็นพิเศษ:</b> หากมีความรู้ด้าน Cloud, AI หรือ SaaS</li></ul>"
             },
-       "Lead AI / Full-Stack Engineer": {
+            "Lead AI / Full-Stack Engineer": {
                 type: "Junior / Fast-track Lead", location: "Bangkok (Hybrid)",
                 desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> ออกแบบและพัฒนาโซลูชันด้าน AI และระบบ Full-Stack ตั้งแต่เริ่มต้นจนสามารถใช้งานจริง (End-to-End)</li><li>นำทีมพัฒนา กำหนดทิศทางเทคโนโลยีที่เหมาะสม และดูแลคุณภาพของโค้ดให้ได้มาตรฐาน</li><li>พัฒนาและเชื่อมต่อระบบ Backend, Frontend และ AI models ให้ทำงานร่วมกันได้อย่างมีประสิทธิภาพ</li><li> วิเคราะห์ความต้องการทางธุรกิจ และแปลงเป็นโซลูชันเชิงเทคนิคที่ใช้งานได้จริง</li><li> ทำงานร่วมกับทีม Product, Design และ Business เพื่อส่งมอบงานที่มีคุณภาพตามเป้าหมาย</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ปริญญาตรีสาขา Computer Engineering, IT หรือสาขาที่เกี่ยวข้อง</li><li>มีความเข้าใจดีเยี่ยมใน JavaScript (React/Next.js) และ Backend (Node.js/Python)</li><li>มีประสบการณ์หรือโปรเจกต์ที่เกี่ยวข้องกับ AI เช่น LLMs และ NLP</li><li>เข้าใจระบบฐานข้อมูล (SQL/NoSQL) และโครงสร้าง Cloud Infrastructure</li><li><b>พิจารณาเป็นพิเศษ:</b> มีประสบการณ์พัฒนา AI Platform / SaaS หรือคุ้นเคยกับ Docker, Kubernetes และ CI/CD</li></ul>"
             },
@@ -111,9 +110,7 @@ import Container from '../components/Container.astro';
                 type: "Full-time", location: "Bangkok (Hybrid)",
                desc: "<h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> ดำเนินการทดสอบเจาะระบบทั้งในส่วน Web, Network และ Application เพื่อค้นหาจุดอ่อน</li><li> วิเคราะห์และระบุช่องโหว่ด้านความปลอดภัย พร้อมจัดลำดับความสำคัญของความเสี่ยง (Risk Scoring)</li><li>จัดทำรายงานผลการทดสอบที่ละเอียดชัดเจน พร้อมข้อเสนอแนะเชิงเทคนิคในการแก้ไขปัญหา</li><li>ทำงานร่วมกับทีมพัฒนาเพื่ออุดช่องโหว่และปรับปรุงระบบให้แข็งแกร่งยิ่งขึ้น</li><li> ร่วมออกแบบด่านจำลองการโจมตีและเคสตัวอย่างสำหรับ Simulation Platform ของบริษัท</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>ปริญญาตรีสาขา Cybersecurity, Computer Science, IT หรือที่เกี่ยวข้อง</li><li>มีความรู้พื้นฐานแน่นด้าน Network Security, Web App Security และระบบปฏิบัติการ (Linux/Windows)</li><li>มีความเข้าใจในการทำ Penetration Testing และรู้จักมาตรฐานอย่าง OWASP Top 10 เป็นอย่างดี</li><li>คุ้นเคยกับการใช้เครื่องมือมาตรฐาน เช่น Burp Suite, Metasploit, Nmap หรือ Wireshark</li><li>มีทักษะการเขียนโปรแกรมหรือ Scripting (Python, Bash) เพื่อช่วยในการทดสอบอัตโนมัติ</li><li> หากมีใบเซอร์ฯ พื้นฐาน เช่น CompTIA PenTest+, eJPT หรือเคยแข่งCTFจะพิจารณาเป็นพิเศษ </li></ul>"
             },
-
-            // --- INTERNSHIPS ---
-           "AI / Machine Learning Intern": {
+            "AI / Machine Learning Intern": {
                 type: "Internship (3 Months)", location: "Hybrid / Remote",
                 desc: "<p>ร่วมเป็นส่วนหนึ่งในการพัฒนาระบบตรวจจับการทุจริตอัจฉริยะ โดยการสร้างและพัฒนาโมเดล AI เพื่อวิเคราะห์รูปแบบกลโกงที่ซับซ้อนจากชุดข้อมูลจริงหลากหลายรูปแบบ<p><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>หน้าที่ความรับผิดชอบ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> สร้างและพัฒนาโมเดลสำหรับตรวจจับกลโกงจากข้อมูลข้อความ (Text), ข้อมูลโทรศัพท์ และรูปภาพ</li><li> จัดเตรียมและติดป้ายกำกับข้อมูล (Data Preprocessing and Labeling) ทั้งแบบมีโครงสร้างและไม่มีโครงสร้าง</li><li> ฝึกฝนและปรับจูนโมเดล (Model Training) เพื่อตรวจจับรูปแบบที่น่าสงสัยและวิเคราะห์ภัยคุกคาม</li><li> วัดผลและปรับปรุงประสิทธิภาพของโมเดลด้วยค่า Accuracy, Precision, Recall และ F1-score</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>คุณสมบัติ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li>กำลังศึกษาหรือจบใหม่ในสาขา Computer Science, Data Science, AI หรือสาขาที่เกี่ยวข้อง</li><li>พื้นฐานแน่นเรื่อง Machine Learning (Classification, Regression, Evaluation Metrics)</li><li>เชี่ยวชาญภาษา Python และการใช้ Library เช่น TensorFlow, PyTorch หรือ Scikit-learn</li><li>มีความสนใจด้าน NLP, Computer Vision หรือการตรวจจับ Deepfake</li><li>คุ้นเคยกับเครื่องมือจัดการข้อมูล เช่น Pandas, NumPy และมีความรู้พื้นฐานด้าน SQL</li></ul><h3 class='text-white font-bold uppercase tracking-widest text-xs mt-8 mb-4'>สิ่งที่จะได้รับ</h3><ul class='list-disc pl-5 space-y-2 text-gray-400'><li> ประสบการณ์ลงมือทำจริงในการใช้ AI ตรวจจับการทุจริตและภัยคุกคามไซเบอร์</li><li> เรียนรู้การสร้างเทคโนโลยีที่เน้นความเชื่อมั่นเพื่อปกป้องผู้ใช้งานจริง</li><li> ทำงานร่วมกับทีม Lead Engineer และทีม Data ในโปรเจกต์ระดับองค์กร</li></ul>"
             },
@@ -139,7 +136,7 @@ import Container from '../components/Container.astro';
             },
         };
 
-      if (role) {
+        if (role) {
             jdTitle.textContent = role;
             formRoleDisplay.textContent = `Applying for: ${role}`;
             hiddenRoleInput.value = role;
@@ -156,43 +153,82 @@ import Container from '../components/Container.astro';
             }
         }
 
-        // ✅ ท่อส่งข้อมูลส่วนตัวเข้า Google Drive & Sheets ของ GrowUpward
+        // ✅ ท่อส่งข้อมูลไป Google (ฉบับ No-CORS)
         const form = document.getElementById('applicationForm');
         const submitBtn = document.getElementById('submitBtn');
         const statusMsg = document.getElementById('statusMsg');
         
-  // 🚀 URL อันใหม่จากในรูปภาพกัปตัน
+        // URL จาก Google Apps Script
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOkeIQqb8MWfOHpp4gXZLqoF65CRvrc2uXvSVB0GmTO2VkAbycDnCeFL-EummSB1ez/exec";
 
-        // ฟังก์ชันยิงข้อมูล (เวอร์ชัน "No-CORS" ทะลุการบล็อก 100%)
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault(); // 🛑 สำคัญมาก: ต้องมีคำสั่งนี้ เพื่อหยุดไม่ให้มันวิ่งไปหน้าอื่น
+                
+                const fileInput = document.getElementById('fileUpload');
+                const file = fileInput.files[0];
+                
+                if(file && file.size > 5 * 1024 * 1024) {
+                    alert("ขนาดไฟล์ใหญ่เกินไป กรุณาอัปโหลดไฟล์ไม่เกิน 5MB");
+                    return;
+                }
+
+                // โชว์สถานะกำลังส่ง
+                submitBtn.textContent = 'Uploading CV... Please wait.';
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.5';
+                submitBtn.style.cursor = 'not-allowed';
+                statusMsg.textContent = "กำลังเข้ารหัสไฟล์และส่งข้อมูลไปยังระบบ (อาจใช้เวลา 5-10 วินาที)...";
+                statusMsg.className = "text-center text-xs mt-4 block text-cyan-400 animate-pulse";
+                statusMsg.classList.remove('hidden');
+
+                const payload = {
+                    appliedPosition: form.applied_position.value,
+                    firstName: form.first_name.value,
+                    lastName: form.last_name.value,
+                    email: form.email.value,
+                    phone: form.phone.value,
+                    fileBase64: null,
+                    mimeType: null,
+                    fileName: null
+                };
+
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = async function() {
+                        payload.fileBase64 = reader.result.split(',')[1];
+                        payload.mimeType = file.type;
+                        payload.fileName = file.name;
+                        sendToGoogle(payload);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    sendToGoogle(payload);
+                }
+            });
+        }
+
         async function sendToGoogle(payload) {
             try {
-                // ส่งข้อมูลไปหา Google โดยปิดระบบเช็ค CORS
+                // ยิงทะลุการบล็อกด้วย mode: 'no-cors'
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
+                    mode: 'no-cors',
                     body: JSON.stringify(payload),
-                    mode: 'no-cors', // 👈 พระเอกของเราอยู่ตรงนี้!
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' }
                 });
 
-                // หมายเหตุ: เมื่อใช้ no-cors เราจะอ่านค่าที่ Google ตอบกลับมาไม่ได้
-                // แต่ถ้าโค้ดรันมาถึงบรรทัดนี้ได้โดยไม่ error แสดงว่ายิงข้อมูลสำเร็จแล้วครับ!
-                
+                // สำเร็จแล้ว!
                 statusMsg.textContent = "ส่งใบสมัครเรียบร้อยแล้ว! ขอบคุณครับ";
                 statusMsg.className = "text-center text-xs mt-4 block text-green-400";
                 
                 alert("Application Submitted Successfully!");
-                
-                // ส่งสำเร็จให้พากลับไปหน้าแรก หรือหน้า Join
                 window.location.href = '/join'; 
 
             } catch (error) {
                 console.error("Fetch Error:", error);
-                
-                // แจ้งเตือนถ้าเน็ตหลุดหรือยิงไม่ไปจริงๆ
                 alert("เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่ครับ");
                 
-                // คืนสถานะปุ่ม
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit Application';
                 submitBtn.style.opacity = '1';
@@ -200,3 +236,6 @@ import Container from '../components/Container.astro';
                 statusMsg.classList.add('hidden');
             }
         }
+    });
+  </script>
+</Layout>
