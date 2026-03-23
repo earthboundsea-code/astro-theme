@@ -37,58 +37,64 @@ import "./../tailus.css"
             ]}
         />
 
-        <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+        <script is:inline>
+            // ฟังก์ชันเริ่มต้นสำหรับ Google Translate
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,th',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                    autoDisplay: false
+                }, 'google_translate_element');
+            }
 
-    <script is:inline>
-  // 1. ต้องนิยามฟังก์ชัน Callback ไว้ก่อนโหลดสคริปต์ภายนอก
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: 'en,th',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-      autoDisplay: false
-    }, 'google_translate_element');
-  }
+            // ฟังก์ชันเปลี่ยนภาษาที่เสถียรขึ้น
+            window.changeLanguage = function(langCode) {
+                const tryChange = () => {
+                    const selectEl = document.querySelector('.goog-te-combo');
+                    if (selectEl) {
+                        selectEl.value = langCode;
+                        selectEl.dispatchEvent(new Event('change'));
+                        // เซฟภาษาลงใน Cookie เผื่อไว้ให้ Google อ่าน
+                        document.cookie = `googtrans=/en/${langCode}; path=/`;
+                        document.cookie = `googtrans=/en/${langCode}; domain=.${window.location.hostname}; path=/`;
+                    } else {
+                        // ถ้ายังไม่เจอให้รออีกนิดแล้วลองใหม่
+                        setTimeout(tryChange, 500);
+                    }
+                };
+                tryChange();
+            }
+        </script>
 
-  // 2. ฟังก์ชันเปลี่ยนภาษาแบบอึด (Retry Mechanism)
-  window.changeLanguage = function(langCode) {
-    let attempts = 0;
-    const maxAttempts = 20; // ลองใหม่สูงสุด 20 ครั้ง (ครั้งละ 0.5 วินาที)
+        <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
 
-    const tryChange = () => {
-      const selectEl = document.querySelector('.goog-te-combo');
-      if (selectEl) {
-        selectEl.value = langCode;
-        selectEl.dispatchEvent(new Event('change'));
-        console.log("Translation triggered for:", langCode);
-      } else if (attempts < maxAttempts) {
-        attempts++;
-        console.log("Waiting for Google Translate widget... attempt:", attempts);
-        setTimeout(tryChange, 500);
-      } else {
-        console.error("Google Translate widget failed to load.");
-      }
-    };
+        <style is:global>
+            /* ซ่อน UI ส่วนเกินของ Google */
+            .goog-te-banner-frame.skiptranslate, 
+            .goog-te-gadget-icon,
+            #goog-gt-tt { display: none !important; }
+            
+            body { top: 0px !important; }
+            
+            .goog-te-gadget { 
+                color: transparent !important; 
+                font-size: 0px !important; 
+            }
+            
+            #google_translate_element { display: none !important; }
 
-    tryChange();
-  }
-</script>
-
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-<style is:global>
-  /* ซ่อนแถบเครื่องมือดั้งเดิมของ Google */
-  .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display: none !important; }
-  body { top: 0px !important; }
-  .goog-te-gadget { color: transparent !important; font-size: 0px !important; }
-  #google_translate_element { display: none !important; }
-</style>
-
+            /* ปรับฟอนต์ให้เป็น Prompt ทันทีเมื่อหน้าเว็บถูกแปลเป็นไทย */
+            html[lang="th"] body,
+            body.translated-ltr {
+                font-family: 'Prompt', 'Urbanist', sans-serif !important;
+            }
+        </style>
     </head>
     <body class="bg-white dark:bg-gray-950">
         <AppHeader />
         <slot />
-        <div id="google_translate_element" style="display:none;"></div>
+        <div id="google_translate_element"></div>
         <AppFooter />
     </body>
 </html>
