@@ -39,42 +39,51 @@ import "./../tailus.css"
 
         <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
 
-        <script is:inline>
-          // ฟังก์ชันเริ่มต้นของ Google Translate
-          function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-              pageLanguage: 'en',
-              includedLanguages: 'en,th',
-              layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-              autoDisplay: false
-            }, 'google_translate_element');
-          }
+    <script is:inline>
+  // 1. ต้องนิยามฟังก์ชัน Callback ไว้ก่อนโหลดสคริปต์ภายนอก
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,th',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
 
-          // ฟังก์ชันสำหรับเรียกใช้การเปลี่ยนภาษาจากที่อื่น (เช่น Footer)
-          window.changeLanguage = function(langCode) {
-            const selectEl = document.querySelector('.goog-te-combo');
-            if (selectEl) {
-              selectEl.value = langCode;
-              selectEl.dispatchEvent(new Event('change'));
-            }
-          }
-        </script>
+  // 2. ฟังก์ชันเปลี่ยนภาษาแบบอึด (Retry Mechanism)
+  window.changeLanguage = function(langCode) {
+    let attempts = 0;
+    const maxAttempts = 20; // ลองใหม่สูงสุด 20 ครั้ง (ครั้งละ 0.5 วินาที)
 
-        <style is:global>
-          /* ซ่อนแถบ Top Bar ของ Google Translate */
-          .goog-te-banner-frame.skiptranslate { display: none !important; }
-          body { top: 0px !important; }
-          
-          /* ซ่อน Widget พื้นฐานของ Google */
-          .goog-te-gadget { color: transparent !important; font-size: 0px !important; }
-          .goog-te-gadget .goog-te-combo { display: none !important; }
-          #google_translate_element { display: none; }
-          
-          /* ปรับฟอนต์ภาษาไทยให้สวยงามหลังแปล */
-          body.translated-ltr {
-            font-family: 'Prompt', sans-serif !important;
-          }
-        </style>
+    const tryChange = () => {
+      const selectEl = document.querySelector('.goog-te-combo');
+      if (selectEl) {
+        selectEl.value = langCode;
+        selectEl.dispatchEvent(new Event('change'));
+        console.log("Translation triggered for:", langCode);
+      } else if (attempts < maxAttempts) {
+        attempts++;
+        console.log("Waiting for Google Translate widget... attempt:", attempts);
+        setTimeout(tryChange, 500);
+      } else {
+        console.error("Google Translate widget failed to load.");
+      }
+    };
+
+    tryChange();
+  }
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<style is:global>
+  /* ซ่อนแถบเครื่องมือดั้งเดิมของ Google */
+  .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display: none !important; }
+  body { top: 0px !important; }
+  .goog-te-gadget { color: transparent !important; font-size: 0px !important; }
+  #google_translate_element { display: none !important; }
+</style>
+
     </head>
     <body class="bg-white dark:bg-gray-950">
         <AppHeader />
