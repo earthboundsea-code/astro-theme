@@ -51,7 +51,7 @@ import Container from "./Container.astro";
 
         <div class="flex items-center gap-3">
           <span class="text-[10px] font-mono text-gray-600 uppercase tracking-tighter">Language</span>
-          <select class="bg-transparent border border-white/10 rounded px-2 py-1 text-xs text-gray-400 outline-none focus:border-cyan-400 transition cursor-pointer appearance-none">
+          <select id="lang-switcher" class="bg-transparent border border-white/10 rounded px-2 py-1 text-xs text-gray-400 outline-none focus:border-cyan-400 transition cursor-pointer appearance-none">
             <option value="en" class="bg-[#0a0a0a]">English (EN)</option>
             <option value="th" class="bg-[#0a0a0a]">ไทย (TH)</option>
           </select>
@@ -59,3 +59,17 @@ import Container from "./Container.astro";
       </div>
     </Container>
 </footer>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const switcher = document.getElementById('lang-switcher');
+    if (switcher) {
+      switcher.addEventListener('change', (e) => {
+        const lang = e.target.value;
+        if (window.changeLanguage) {
+          window.changeLanguage(lang);
+        }
+      });
+    }
+  });
+</script>
