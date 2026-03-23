@@ -39,7 +39,7 @@ import Container from '../components/Container.astro';
                     </p>
                 </div>
 
-                <form id="applicationForm" action="https://forminit.com/f/fjyf1064yed" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <form id="applicationForm" class="space-y-6">
                     <input type="hidden" name="applied_position" id="hidden-role" value="General Application" />
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -64,13 +64,15 @@ import Container from '../components/Container.astro';
                     </div>
 
                     <div class="space-y-2">
-                        <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Upload CV (PDF Only)</label>
-                        <input type="file" name="file" accept=".pdf" required class="block w-full text-sm text-gray-400 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-cyan-400 file:text-black hover:file:bg-white cursor-pointer transition-all border border-white/10 rounded-xl bg-[#0a0a0a]" />
+                        <label class="text-[10px] text-gray-400 uppercase tracking-widest ml-2">Upload CV (PDF Only - Max 5MB)</label>
+                        <input type="file" id="fileUpload" accept=".pdf" required class="block w-full text-sm text-gray-400 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-cyan-400 file:text-black hover:file:bg-white cursor-pointer transition-all border border-white/10 rounded-xl bg-[#0a0a0a]" />
                     </div>
 
                     <button type="submit" id="submitBtn" class="w-full py-4 mt-8 bg-cyan-400 hover:bg-white text-black font-black rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
                         Submit Application
                     </button>
+
+                    <p id="statusMsg" class="text-center text-xs mt-4 hidden"></p>
                 </form>
 
             </div>
@@ -137,40 +139,111 @@ import Container from '../components/Container.astro';
             },
         };
 
-        // ตรวจสอบว่ามีชื่อตำแหน่งส่งมาใน URL ไหม
-        if (role) {
+      if (role) {
             jdTitle.textContent = role;
             formRoleDisplay.textContent = `Applying for: ${role}`;
             hiddenRoleInput.value = role;
 
-            // ดึงข้อมูลจากฐานข้อมูลด้านบนมาแสดง
             const data = jobData[role];
             if (data) {
                 jdType.textContent = data.type;
                 jdLocation.textContent = data.location;
                 jdContent.innerHTML = data.desc;
             } else {
-                // ถ้าหาชื่อไม่เจอ (เช่น พิมพ์ URL เอง)
                 jdType.textContent = "General";
                 jdLocation.textContent = "Bangkok";
                 jdContent.innerHTML = "<p>โปรดระบุตำแหน่งที่คุณสนใจในแบบฟอร์ม หรือแนบ CV เพื่อให้เราพิจารณาตำแหน่งที่เหมาะสมให้กับคุณ</p>";
             }
         }
 
-      // ✅ ฟังก์ชันส่ง Form (เปลี่ยนมาใช้ Native Submit ของ Browser แทน Fetch API)
+        // ✅ ท่อส่งข้อมูลส่วนตัวเข้า Google Drive & Sheets ของ GrowUpward
         const form = document.getElementById('applicationForm');
         const submitBtn = document.getElementById('submitBtn');
+        const statusMsg = document.getElementById('statusMsg');
+        
+        // 🚀 URL ที่กัปตันสร้างมาใส่ตรงนี้แล้วครับ!
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOkeIQqb8MWfOHpp4gXZLqoF65CRvrc2uXvSVB0GmTO2VkAbycDnCeFL-EummSB1ez/exec";
 
         if (form) {
-            form.addEventListener('submit', () => {
-                // ⚠️ สำคัญมาก: เราเอา e.preventDefault() ออกไปแล้ว 
-                // เพื่อปล่อยให้ Browser หอบไฟล์และข้อมูลวิ่งไปหา Forminit โดยตรง
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault(); // กันการรีเฟรชหน้า
                 
-                // สิ่งที่เราทำคือแค่เปลี่ยนหน้าตาปุ่ม เพื่อกันไม่ให้ผู้สมัครกดส่งซ้ำ (Double Click)
-                submitBtn.textContent = 'Sending Application...';
+                const fileInput = document.getElementById('fileUpload');
+                const file = fileInput.files[0];
+                
+                // เช็คขนาดไฟล์ (กันคนอัปไฟล์ใหญ่เกิน 5MB)
+                if(file && file.size > 5 * 1024 * 1024) {
+                    alert("ขนาดไฟล์ใหญ่เกินไป กรุณาอัปโหลดไฟล์ PDF ขนาดไม่เกิน 5MB ครับ");
+                    return;
+                }
+
+                // เปลี่ยนหน้าตาปุ่มและข้อความ
+                submitBtn.textContent = 'Uploading CV... Please wait.';
+                submitBtn.disabled = true;
                 submitBtn.style.opacity = '0.5';
-                submitBtn.style.pointerEvents = 'none'; // ล็อคปุ่มไม่ให้กดซ้ำ
+                submitBtn.style.cursor = 'not-allowed';
+                statusMsg.textContent = "กำลังอัปโหลดไฟล์เข้าระบบ (อาจใช้เวลา 5-10 วินาที)...";
+                statusMsg.className = "text-center text-xs mt-4 block text-cyan-400 animate-pulse";
+
+                // จัดเตรียมข้อมูลจากฟอร์ม
+                const payload = {
+                    appliedPosition: form.applied_position.value,
+                    firstName: form.first_name.value,
+                    lastName: form.last_name.value,
+                    email: form.email.value,
+                    phone: form.phone.value,
+                    fileBase64: null,
+                    mimeType: null,
+                    fileName: null
+                };
+
+                // ถ้ามีไฟล์ ให้แปลงเป็นรหัส Base64 แล้วค่อยส่ง
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = async function() {
+                        // ตัดส่วนหัวแปลกๆ ออกก่อนส่ง
+                        payload.fileBase64 = reader.result.split(',')[1];
+                        payload.mimeType = file.type;
+                        payload.fileName = file.name;
+                        
+                        sendToGoogle(payload);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    sendToGoogle(payload);
+                }
             });
+        }
+
+        // ฟังก์ชันยิงข้อมูลไปหา Google Script
+        async function sendToGoogle(payload) {
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' } // ใช้ text/plain เพื่อหลบ CORS Policy
+                });
+
+                const result = await response.json();
+                
+                if (result.result === 'success') {
+                    statusMsg.textContent = "ส่งใบสมัครเรียบร้อยแล้ว! ขอบคุณครับ";
+                    statusMsg.className = "text-center text-xs mt-4 block text-green-400";
+                    alert("Application Submitted Successfully!");
+                    // 🎯 พอกด OK แล้วให้กลับไปหน้าแรก หรือหน้า Careers
+                    window.location.href = '/join'; 
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert("เกิดข้อผิดพลาดในการส่งใบสมัคร กรุณาลองใหม่อีกครั้งครับ");
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Application';
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+                statusMsg.classList.add('hidden');
+            }
         }
     });
   </script>
