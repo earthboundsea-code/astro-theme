@@ -18,26 +18,29 @@ const insights = [
 
 <Layout title="Insights | GrowUpward 2026">
   <main class="bg-[#0a0a0a] min-h-screen text-white pt-32 pb-20 relative overflow-hidden">
+    
+    <div class="absolute top-0 right-0 w-[600px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none"></div>
+
     <Container>
-      
-      <div class="max-w-3xl mb-16">
+      <div class="max-w-3xl mb-16 relative">
         <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6">Latest <span class="text-gray-500">Insights</span></h1>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {insights.map((post) => (
           <article 
-            class="group bg-white/[0.02] border border-white/10 rounded-[2.5rem] overflow-hidden hover:border-cyan-400/50 transition-all cursor-pointer"
+            class="group bg-white/[0.02] border border-white/10 rounded-[2.5rem] overflow-hidden backdrop-blur-sm hover:border-cyan-400/50 transition-all cursor-pointer flex flex-col shadow-xl"
             onclick={`openModal('${post.id}')`}
           >
             <div class="aspect-[16/10] overflow-hidden">
-              <img src={post.image} class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+              <img src={post.image} class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
             </div>
-            <div class="p-8">
+            <div class="p-8 flex flex-col flex-grow">
               <span class="text-gray-500 text-[10px] uppercase font-mono mb-3 block">{post.date}</span>
               <h2 class="text-xl font-bold mb-4 group-hover:text-cyan-400 transition-colors">{post.title}</h2>
-              <p class="text-gray-400 text-sm mb-6 line-clamp-3 font-light">{post.description}</p>
-              <button class="text-xs font-bold uppercase tracking-widest text-cyan-400 flex items-center gap-2">
+              <p class="text-gray-400 text-sm mb-6 line-clamp-3 font-light leading-relaxed">{post.description}</p>
+              <button class="mt-auto text-xs font-bold uppercase tracking-widest text-cyan-400 flex items-center gap-2 group-hover:gap-4 transition-all">
                 Read Full Article →
               </button>
             </div>
@@ -45,14 +48,14 @@ const insights = [
         ))}
       </div>
 
-      <div class="mt-32 p-12 bg-gradient-to-br from-cyan-950/40 to-black border border-white/10 rounded-[3rem] text-center relative overflow-hidden group">
+      <div class="mt-32 p-12 bg-white/[0.02] border border-white/10 rounded-[3rem] backdrop-blur-md text-center relative overflow-hidden group">
         <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] -mr-32 -mt-32 group-hover:bg-cyan-400/20 transition-all"></div>
         <h3 class="text-3xl font-black uppercase mb-4">Never Miss an Update</h3>
-        <p class="text-gray-400 max-w-xl mx-auto mb-8 font-light italic">
+        <p class="text-gray-400 max-w-xl mx-auto mb-8 font-light italic leading-relaxed">
           Subscribe to our intelligence briefing to stay ahead of emerging cyber threats and company announcements.
         </p>
         
-        <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+        <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto relative z-10">
           <input 
             type="email" 
             name="email" 
@@ -72,7 +75,7 @@ const insights = [
       </div>
 
       <div id="article-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6 backdrop-blur-xl bg-black/80">
-        <div class="bg-[#111] border border-white/10 w-full max-w-2xl max-h-[80vh] rounded-[2.5rem] overflow-y-auto p-8 sm:p-12 relative shadow-2xl">
+        <div class="bg-black/80 border border-white/10 w-full max-w-2xl max-h-[80vh] rounded-[2.5rem] overflow-y-auto p-8 sm:p-12 relative shadow-2xl">
           <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors text-2xl">&times;</button>
           <div id="modal-body">
              </div>
@@ -92,12 +95,12 @@ const insights = [
     if (post && modal && body) {
       body.innerHTML = `
         <span class="text-cyan-400 text-[10px] uppercase font-bold tracking-[0.2em] mb-4 block">${post.category}</span>
-        <h2 class="text-3xl font-bold mb-6">${post.title}</h2>
-        <div class="text-gray-400 leading-relaxed font-light space-y-4">
+        <h2 class="text-3xl font-bold mb-6 leading-tight">${post.title}</h2>
+        <div class="text-gray-400 leading-relaxed font-light space-y-4 text-base">
           ${post.fullContent}
         </div>
-        <div class="mt-8 pt-8 border-t border-white/5 flex gap-4">
-          ${post.tags.map(tag => `<span class="text-[10px] text-gray-600 font-mono">${tag}</span>`).join('')}
+        <div class="mt-8 pt-8 border-t border-white/5 flex flex-wrap gap-4">
+          ${post.tags.map(tag => `<span class="text-[10px] text-gray-600 font-mono bg-white/5 px-2 py-1 rounded">${tag}</span>`).join('')}
         </div>
       `;
       modal.classList.remove('hidden');
@@ -134,8 +137,6 @@ const insights = [
 
       const formData = new FormData(subForm);
       const params = new URLSearchParams();
-      
-      // ส่งค่า Email ไปที่ Sheet (อย่าลืมตั้งชื่อคอลัมน์ว่า email ใน Sheet นะครับ)
       params.append('email', formData.get('email'));
 
       fetch(scriptURL, { 
@@ -146,14 +147,12 @@ const insights = [
         body: params.toString()
       })
       .then(() => {
-          subBtn.innerHTML = "DONE!";
+          subBtn.innerHTML = "SUBSCRIBED!";
           subBtn.classList.replace('bg-cyan-400', 'bg-emerald-500');
           subBtn.style.opacity = "1";
-          
           subMsg.innerHTML = "SUCCESS! YOU ARE NOW SUBSCRIBED.";
           subMsg.classList.remove('hidden');
           subMsg.classList.add('text-emerald-400');
-          
           subForm.reset();
       })
       .catch(error => {
