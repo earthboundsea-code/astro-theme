@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/Container.astro';
+
+// ข้อมูลบทความ (กัปตันสามารถเพิ่มบทความใหม่ๆ ใน Array นี้ได้เลยครับ)
+const insights = [
+  {
+    title: "Happy International Women’s Day! 🎉",
+    category: "Company News",
+    date: "March 8, 2026",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop",
+    description: "Women remain underrepresented in the cybersecurity industry worldwide. Globally, women make up approximately 24% of the cybersecurity workforce...",
+    content: `Women remain underrepresented in the cybersecurity industry worldwide. Globally, women make up approximately 24% of the cybersecurity workforce, reflecting a significant gender gap in one of the fastest-growing sectors of the digital economy.\n\nIn Thailand, the gender gap is even more pronounced, with women representing estimated at around 3%. Expanding education, visibility, and mentorship opportunities will be essential to encourage more women to enter the sector.`,
+    tags: ["#InternationalWomensDay", "#WomenInCybersecurity"]
+  },
+  // กัปตันสามารถก๊อปปี้ก้อนด้านบนมาวางเพิ่มเพื่อทำบทความที่ 2, 3 ได้ครับ
+];
+---
+
+<Layout title="Insights | GrowUpward 2026">
+  <main class="bg-[#0a0a0a] min-h-screen text-white pt-32 pb-20 relative overflow-hidden">
+    
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <Container>
+      <div class="max-w-3xl mb-16">
+        <span class="px-4 py-1.5 bg-cyan-400/10 text-cyan-400 text-[10px] uppercase tracking-[0.2em] rounded-full font-bold border border-cyan-400/20 mb-6 inline-block">
+          Knowledge Base
+        </span>
+        <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6">
+          Latest <span class="text-gray-500">Insights</span>
+        </h1>
+        <p class="text-gray-400 text-lg font-light leading-relaxed">
+          Stay updated with company news, cybersecurity trends, and our mission to secure the digital ecosystem in Thailand and beyond.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {insights.map((post) => (
+          <article class="group bg-white/[0.02] border border-white/10 rounded-[2.5rem] overflow-hidden hover:border-cyan-400/50 transition-all duration-500 flex flex-col">
+            <div class="aspect-[16/10] overflow-hidden relative">
+              <img 
+                src={post.image} 
+                alt={post.title} 
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+              />
+              <div class="absolute top-4 left-4">
+                <span class="px-3 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] uppercase font-bold tracking-widest text-cyan-400">
+                  {post.category}
+                </span>
+              </div>
+            </div>
+
+            <div class="p-8 flex flex-col flex-grow">
+              <span class="text-gray-500 text-[10px] uppercase font-mono mb-3">{post.date}</span>
+              <h2 class="text-xl font-bold mb-4 group-hover:text-cyan-400 transition-colors leading-tight">
+                {post.title}
+              </h2>
+              <p class="text-gray-400 text-sm leading-relaxed font-light mb-6 line-clamp-3">
+                {post.description}
+              </p>
+              
+              <div class="mt-auto flex flex-wrap gap-2 mb-6">
+                {post.tags.map(tag => (
+                  <span class="text-[9px] text-gray-500 font-mono uppercase tracking-tighter">{tag}</span>
+                ))}
+              </div>
+
+              <a href="#" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white group-hover:gap-4 transition-all">
+                Read Full Article 
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-32 p-12 bg-gradient-to-br from-cyan-950/40 to-black border border-white/10 rounded-[3rem] text-center relative overflow-hidden group">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] -mr-32 -mt-32 group-hover:bg-cyan-400/20 transition-all"></div>
+        <h3 class="text-3xl font-black uppercase mb-4">Never Miss an Update</h3>
+        <p class="text-gray-400 max-w-xl mx-auto mb-8 font-light italic">
+          Subscribe to our intelligence briefing to stay ahead of emerging cyber threats and company announcements.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input type="email" placeholder="Enter your email" class="flex-grow bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-cyan-400 transition" />
+          <button class="px-8 py-4 bg-cyan-400 text-black font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-cyan-300 transition-all shadow-lg shadow-cyan-400/20">
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </Container>
+  </main>
+</Layout>
