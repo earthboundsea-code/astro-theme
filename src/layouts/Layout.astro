@@ -13,7 +13,6 @@ import "./../tailus.css"
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content="GrowUpward - Protect security: a fundamental human necessity" />
-        
         <title>GrowUpward 2026</title>
 
         <AstroFont
@@ -37,57 +36,45 @@ import "./../tailus.css"
             ]}
         />
 
+        <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
+
         <script is:inline>
-            // ฟังก์ชันเริ่มต้นสำหรับ Google Translate
             function googleTranslateElementInit() {
                 new google.translate.TranslateElement({
                     pageLanguage: 'en',
                     includedLanguages: 'en,th',
-                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                     autoDisplay: false
                 }, 'google_translate_element');
             }
 
-            // ฟังก์ชันเปลี่ยนภาษาที่เสถียรขึ้น
+            // ฟังก์ชันเปลี่ยนภาษาผ่าน Cookie (เสถียรที่สุด)
             window.changeLanguage = function(langCode) {
-                const tryChange = () => {
-                    const selectEl = document.querySelector('.goog-te-combo');
-                    if (selectEl) {
-                        selectEl.value = langCode;
-                        selectEl.dispatchEvent(new Event('change'));
-                        // เซฟภาษาลงใน Cookie เผื่อไว้ให้ Google อ่าน
-                        document.cookie = `googtrans=/en/${langCode}; path=/`;
-                        document.cookie = `googtrans=/en/${langCode}; domain=.${window.location.hostname}; path=/`;
-                    } else {
-                        // ถ้ายังไม่เจอให้รออีกนิดแล้วลองใหม่
-                        setTimeout(tryChange, 500);
-                    }
-                };
-                tryChange();
+                // รูปแบบคือ /ภาษาต้นทาง/ภาษาปลายทาง
+                const langValue = `/en/${langCode}`;
+                
+                // ฝัง Cookie ลงไปในทุก Domain ที่เป็นไปได้
+                document.cookie = `googtrans=${langValue}; path=/`;
+                document.cookie = `googtrans=${langValue}; domain=${window.location.hostname}; path=/`;
+                document.cookie = `googtrans=${langValue}; domain=.${window.location.hostname}; path=/`;
+                
+                // บังคับรีโหลดหน้าเว็บเพื่อให้ Google อ่าน Cookie ทันที
+                window.location.reload();
             }
         </script>
 
-        <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
-
         <style is:global>
-            /* ซ่อน UI ส่วนเกินของ Google */
+            /* ซ่อน UI ทั้งหมดของ Google เพื่อความ Clean */
             .goog-te-banner-frame.skiptranslate, 
             .goog-te-gadget-icon,
-            #goog-gt-tt { display: none !important; }
-            
+            #goog-gt-tt,
+            .goog-te-balloon-frame { display: none !important; }
             body { top: 0px !important; }
-            
-            .goog-te-gadget { 
-                color: transparent !important; 
-                font-size: 0px !important; 
-            }
-            
+            .goog-te-gadget { font-size: 0px !important; color: transparent !important; }
             #google_translate_element { display: none !important; }
-
-            /* ปรับฟอนต์ให้เป็น Prompt ทันทีเมื่อหน้าเว็บถูกแปลเป็นไทย */
-            html[lang="th"] body,
-            body.translated-ltr {
-                font-family: 'Prompt', 'Urbanist', sans-serif !important;
+            
+            /* ปรับฟอนต์ภาษาไทยให้สวยงาม */
+            body.translated-ltr, [lang="th"] body {
+                font-family: 'Prompt', sans-serif !important;
             }
         </style>
     </head>
