@@ -10,7 +10,8 @@ import Container from '../components/Container.astro';
     <div class="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none"></div>
 
     <Container>
-   <div class="max-w-4xl mx-auto text-center pt-12 md:pt-20 mb-24">
+      
+      <div class="max-w-4xl mx-auto text-center pt-12 md:pt-20 mb-24">
         <h1 class="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
             Bridging <span class="text-cyan-400">Security</span> <br/>with Human Impact.
         </h1>
@@ -20,7 +21,7 @@ import Container from '../components/Container.astro';
         </p>
       </div>
 
-     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
         
         <div class="p-8 bg-white/[0.02] border border-white/10 rounded-[2.5rem] hover:border-cyan-400/50 transition-all duration-500 group">
           <div class="w-12 h-12 bg-cyan-400 text-black flex items-center justify-center rounded-2xl mb-6 font-bold group-hover:scale-110 transition-transform">01</div>
@@ -80,11 +81,53 @@ import Container from '../components/Container.astro';
         </div>
 
       </div>
+
+      <div class="mb-32">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+          <span class="px-4 py-1.5 bg-emerald-400/10 text-emerald-400 text-[10px] uppercase tracking-[0.2em] rounded-full font-bold border border-emerald-400/20 mb-6 inline-block">
+            Trusted by Leaders
+          </span>
+          <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tight leading-[0.9] mb-8">
+            <span class="text-gray-500">Membership</span> & Partner
+          </h2>
+          <p class="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
+            GrowUpward is affiliated with and supported by the most rigorous governmental and industrial bodies. <br class="hidden md:block"/> 
+            These partnerships solidify our commitment to an absolute standard of defense.
+          </p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
+          
+          <div class="flex-1 p-12 bg-white/[0.02] border border-white/10 rounded-[3rem] text-center flex flex-col items-center gap-8 group">
+            <img src="/government-compliance-cluster.png" alt="Government Compliance Cluster" class="h-40 w-auto group-hover:scale-105 transition-transform" />
+            <div class="space-y-3">
+              <span class="text-[11px] text-gray-400 uppercase tracking-widest font-bold">Category</span>
+              <h4 class="text-lg font-bold uppercase text-white">Government & Compliance</h4>
+              <p class="text-sm text-gray-500 leading-relaxed max-w-xs">
+                Certified and integrated with critical governmental cybersecurity infrastructure and compliance standards.
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex-1 p-12 bg-white/[0.02] border border-white/10 rounded-[3rem] text-center flex flex-col items-center gap-8 group relative overflow-hidden">
+            <img src="/growupward-fortress.png" alt="GrowUpward Fortress" class="h-40 w-auto group-hover:scale-105 transition-transform" />
+            <div class="space-y-3">
+              <span class="text-[11px] text-gray-400 uppercase tracking-widest font-bold">Category</span>
+              <h4 class="text-lg font-bold uppercase text-cyan-400">Trusted Community Member</h4>
+              <p class="text-sm text-gray-500 leading-relaxed max-w-xs">
+                A recognized leader and member of the broader defensive cybersecurity ecosystem, signifying verified trust and <span class="text-white font-medium">proprietary defense</span>.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-32">
         <div class="w-full lg:w-1/2 relative">
             <div class="aspect-square bg-gradient-to-tr from-cyan-950 to-[#0a0a0a] border border-white/10 rounded-[3rem] overflow-hidden flex items-center justify-center group">
                 <div class="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <img src="/anti-scam-art.png" alt="Vision Art" class="w-4/5 h-auto grayscale group-hover:grayscale-0 transition-all duration-700" />
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Vision Art" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-50 group-hover:opacity-100" />
             </div>
             <div class="absolute -bottom-6 -right-6 bg-white text-black p-8 rounded-[2rem] hidden md:block shadow-2xl">
                 <p class="text-4xl font-black italic">"Innovation for All"</p>
@@ -115,6 +158,7 @@ import Container from '../components/Container.astro';
             </div>
         </div>
       </div>
+
     </Container>
   </main>
 </Layout>
