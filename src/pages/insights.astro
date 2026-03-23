@@ -19,6 +19,7 @@ const insights = [
 <Layout title="Insights | GrowUpward 2026">
   <main class="bg-[#0a0a0a] min-h-screen text-white pt-32 pb-20 relative overflow-hidden">
     <Container>
+      
       <div class="max-w-3xl mb-16">
         <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6">Latest <span class="text-gray-500">Insights</span></h1>
       </div>
@@ -42,6 +43,32 @@ const insights = [
             </div>
           </article>
         ))}
+      </div>
+
+      <div class="mt-32 p-12 bg-gradient-to-br from-cyan-950/40 to-black border border-white/10 rounded-[3rem] text-center relative overflow-hidden group">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] -mr-32 -mt-32 group-hover:bg-cyan-400/20 transition-all"></div>
+        <h3 class="text-3xl font-black uppercase mb-4">Never Miss an Update</h3>
+        <p class="text-gray-400 max-w-xl mx-auto mb-8 font-light italic">
+          Subscribe to our intelligence briefing to stay ahead of emerging cyber threats and company announcements.
+        </p>
+        
+        <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input 
+            type="email" 
+            name="email" 
+            required 
+            placeholder="Enter your email" 
+            class="flex-grow bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-cyan-400 transition" 
+          />
+          <button 
+            type="submit" 
+            id="sub-btn" 
+            class="px-8 py-4 bg-cyan-400 text-black font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-cyan-300 transition-all shadow-lg shadow-cyan-400/20 active:scale-95"
+          >
+            Subscribe
+          </button>
+        </form>
+        <p id="sub-msg" class="mt-4 text-[10px] uppercase tracking-widest text-gray-500 hidden"></p>
       </div>
 
       <div id="article-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6 backdrop-blur-xl bg-black/80">
@@ -75,7 +102,7 @@ const insights = [
       `;
       modal.classList.remove('hidden');
       modal.classList.add('flex');
-      document.body.style.overflow = 'hidden'; // ป้องกันการไถหน้าจอพื้นหลัง
+      document.body.style.overflow = 'hidden'; 
     }
   }
 
@@ -86,9 +113,55 @@ const insights = [
     document.body.style.overflow = 'auto';
   }
 
-  // ปิด modal เมื่อกดพื้นที่ว่าง
   window.onclick = function(event) {
     const modal = document.getElementById('article-modal');
     if (event.target == modal) closeModal();
+  }
+</script>
+
+<script is:inline define:vars={{ scriptURL: "https://script.google.com/macros/s/AKfycbxE9DnvLg2guRLeAE3jv74n2pq5SiJsFZU4pMQ19li8hS8zw_PK0WqpN78pVVJIn_bc/exec" }}>
+  const subForm = document.getElementById('newsletter-form');
+  const subBtn = document.getElementById('sub-btn');
+  const subMsg = document.getElementById('sub-msg');
+
+  if(subForm) {
+    subForm.addEventListener('submit', e => {
+      e.preventDefault();
+      
+      subBtn.disabled = true;
+      subBtn.innerHTML = "WAIT...";
+      subBtn.style.opacity = "0.7";
+
+      const formData = new FormData(subForm);
+      const params = new URLSearchParams();
+      
+      // ส่งค่า Email ไปที่ Sheet (อย่าลืมตั้งชื่อคอลัมน์ว่า email ใน Sheet นะครับ)
+      params.append('email', formData.get('email'));
+
+      fetch(scriptURL, { 
+        method: 'POST', 
+        mode: 'no-cors', 
+        cache: 'no-cache',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      })
+      .then(() => {
+          subBtn.innerHTML = "DONE!";
+          subBtn.classList.replace('bg-cyan-400', 'bg-emerald-500');
+          subBtn.style.opacity = "1";
+          
+          subMsg.innerHTML = "SUCCESS! YOU ARE NOW SUBSCRIBED.";
+          subMsg.classList.remove('hidden');
+          subMsg.classList.add('text-emerald-400');
+          
+          subForm.reset();
+      })
+      .catch(error => {
+          console.error('Error!', error.message);
+          subBtn.disabled = false;
+          subBtn.innerHTML = "TRY AGAIN";
+          subBtn.style.opacity = "1";
+      });
+    });
   }
 </script>
