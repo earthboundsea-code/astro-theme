@@ -24,11 +24,9 @@ import "./../tailus.css"
                     preload: true,
                     display: "swap",
                     selector: "html",
-                    // จุดสำคัญ: สั่งให้ถ้าไม่มีภาษาไทย ให้สลับไปใช้ Prompt แทน
                     fallback: "'Prompt', sans-serif", 
                     googleFontsURL: 'https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap',
                 },
-                // โหลดฟอนต์ Prompt ของ Google เข้ามาเพิ่มสำหรับภาษาไทย
                 {
                     src: [],
                     name: "Prompt",
@@ -38,10 +36,50 @@ import "./../tailus.css"
                 }
             ]}
         />
+
+        <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+
+        <script is:inline>
+          // ฟังก์ชันเริ่มต้นของ Google Translate
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              includedLanguages: 'en,th',
+              layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+              autoDisplay: false
+            }, 'google_translate_element');
+          }
+
+          // ฟังก์ชันสำหรับเรียกใช้การเปลี่ยนภาษาจากที่อื่น (เช่น Footer)
+          window.changeLanguage = function(langCode) {
+            const selectEl = document.querySelector('.goog-te-combo');
+            if (selectEl) {
+              selectEl.value = langCode;
+              selectEl.dispatchEvent(new Event('change'));
+            }
+          }
+        </script>
+
+        <style is:global>
+          /* ซ่อนแถบ Top Bar ของ Google Translate */
+          .goog-te-banner-frame.skiptranslate { display: none !important; }
+          body { top: 0px !important; }
+          
+          /* ซ่อน Widget พื้นฐานของ Google */
+          .goog-te-gadget { color: transparent !important; font-size: 0px !important; }
+          .goog-te-gadget .goog-te-combo { display: none !important; }
+          #google_translate_element { display: none; }
+          
+          /* ปรับฟอนต์ภาษาไทยให้สวยงามหลังแปล */
+          body.translated-ltr {
+            font-family: 'Prompt', sans-serif !important;
+          }
+        </style>
     </head>
     <body class="bg-white dark:bg-gray-950">
         <AppHeader />
         <slot />
+        <div id="google_translate_element" style="display:none;"></div>
         <AppFooter />
     </body>
 </html>
