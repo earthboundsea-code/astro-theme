@@ -1,0 +1,93 @@
+---
+import { UserButton } from '@clerk/astro/components';
+
+// 🛑 ด่านตรวจความปลอดภัย: เช็คว่าล็อกอินหรือยัง?
+const { userId } = Astro.locals.auth();
+
+if (!userId) {
+    // ถ้าไม่มี userId (ยังไม่ล็อกอิน) ให้เด้งไปหน้า login ทันที
+    return Astro.redirect('/login');
+}
+---
+
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบสแกนใบหน้า - Growupward</title>
+</head>
+<body class="bg-gray-50 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="fixed top-6 right-6 z-50 bg-white p-1 rounded-full shadow-md">
+        <UserButton afterSignOutUrl="/login" />
+    </div>
+
+    <div class="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full text-center border border-gray-100">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">📸 เริ่มการตรวจสอบ</h2>
+        <p class="text-gray-500 mb-6 text-sm">ภาพของคุณจะถูกนำไปเปรียบเทียบกับฐานข้อมูลอาชญากรรม</p>
+        
+        <div class="relative w-full aspect-square bg-black rounded-2xl overflow-hidden mb-6 shadow-inner">
+            <video id="video" autoplay playsinline class="object-cover w-full h-full scale-x-[-1]"></video>
+            <div class="absolute inset-0 border-[16px] border-white/10 pointer-events-none"></div>
+        </div>
+
+        <button id="snapBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-6 rounded-xl transition duration-300 transform active:scale-95 shadow-lg">
+            ถ่ายรูปและตรวจสอบ
+        </button>
+        
+        <div id="statusText" class="mt-4 font-medium text-indigo-600 min-h-[1.5rem] text-sm"></div>
+
+        <canvas id="canvas" width="400" height="400" class="hidden"></canvas>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const snapBtn = document.getElementById('snapBtn');
+        const statusText = document.getElementById('statusText');
+
+        // 1. เปิดกล้อง
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
+            .then(stream => { video.srcObject = stream; })
+            .catch(err => { 
+                statusText.innerText = "❌ กรุณาอนุญาตให้เข้าถึงกล้อง";
+                statusText.classList.add('text-red-500');
+            });
+
+        // 2. ถ่ายรูปและส่ง API
+        snapBtn.addEventListener('click', async () => {
+            snapBtn.disabled = true;
+            statusText.innerText = "กำลังวิเคราะห์ใบหน้า... 🔍";
+
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, 400, 400);
+            
+            canvas.toBlob(async (blob) => {
+                if(!blob) return;
+                const formData = new FormData();
+                formData.append('file', blob, 'check.jpg');
+
+                try {
+                    // ⚠️ ตรงนี้คือจุดที่เราจะเชื่อมกับ Python FastAPI ในขั้นตอนต่อไป
+                    const response = await fetch('https://api.your-backend.com/verify-identity/', {
+                        method: 'POST',
+                        headers: { 'X-API-Key': 'earth-super-secret-key-2026' },
+                        body: formData
+                    });
+                    const data = await response.json();
+                    
+                    if(data.risk?.score === 100) {
+                        statusText.innerHTML = `<span class="text-red-600 font-bold">🚨 พบประวัติเสี่ยง!</span><br><a href="${data.pdf_download_link}" target="_blank" class="text-xs underline">ดาวน์โหลดหลักฐาน PDF</a>`;
+                    } else {
+                        statusText.innerHTML = `<span class="text-green-600 font-bold">✅ ไม่พบประวัติมิจฉาชีพ</span>`;
+                    }
+                } catch (err) {
+                    statusText.innerText = "❌ การเชื่อมต่อล้มเหลว";
+                } finally {
+                    snapBtn.disabled = false;
+                }
+            }, 'image/jpeg', 0.9);
+        });
+    </script>
+</body>
+</html>
