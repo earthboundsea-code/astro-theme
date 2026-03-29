@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+const { auth } = Astro.locals;
+
+// เช็คว่าล็อกอินหรือยัง
+if (!auth().userId) {
+  return Astro.redirect('/login');
+}
+---
+
+<Layout title="ลงทะเบียนคุ้มครองตัวตน (KYC) - Cyber Hunter">
+  <main class="min-h-screen bg-gray-900 text-white py-12 px-4">
+    <div class="max-w-2xl mx-auto">
+      <a href="/dashboard" class="text-blue-400 hover:underline mb-6 inline-block">← กลับไปหน้าเลือกบริการ</a>
+      
+      <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 shadow-xl relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-green-400 to-emerald-600"></div>
+
+        <h1 class="text-3xl font-bold mb-2 text-green-400">🛡️ ลงทะเบียนคุ้มครองตัวตน</h1>
+        <p class="text-gray-400 mb-8">บันทึกอัตลักษณ์ของคุณไว้ในระบบ เพื่อป้องกันมิจฉาชีพนำรูปภาพของคุณไปแอบอ้างในอนาคต</p>
+
+        <form id="kycForm" class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium mb-2">ชื่อ - นามสกุล (สำหรับอ้างอิง)</label>
+            <input type="text" id="fullName" name="fullName" placeholder="เช่น นายสมชาย ใจดี" required
+              class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 outline-none transition-all">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2 text-gray-300">
+              อัปโหลดรูปภาพใบหน้าที่ชัดเจน <span class="text-xs text-gray-500">(ระบบจะแปลงเป็นรหัสลายนิ้วมือดิจิทัล ไม่เก็บรูปภาพต้นฉบับไว้ให้ใครเห็น)</span>
+            </label>
+            <input type="file" id="kycImageInput" accept="image/*" class="hidden" required>
+            
+            <div id="dropZoneKYC" class="border-2 border-dashed border-gray-600 rounded-xl p-8 text-center cursor-pointer hover:border-green-500 transition-colors bg-gray-700/50">
+              <span id="dropTextKYC" class="text-gray-400">คลิกเพื่อถ่ายรูป หรือ เลือกรูปภาพใบหน้าของคุณ</span>
+              <img id="previewKYC" class="hidden mt-4 mx-auto max-h-48 rounded-lg border-2 border-green-500 shadow-[0_0_15px_rgba(74,222,128,0.3)]">
+            </div>
+          </div>
+
+          <div class="flex items-start bg-gray-900/50 p-4 rounded-lg border border-gray-700">
+            <input type="checkbox" id="consent" required class="mt-1 mr-3 w-4 h-4 rounded bg-gray-700 border-gray-600 text-green-500 focus:ring-green-500 focus:ring-offset-gray-800">
+            <label for="consent" class="text-xs text-gray-400 leading-relaxed">
+              ข้าพเจ้ายืนยันว่ารูปภาพที่อัปโหลดคือใบหน้าของข้าพเจ้าจริง และยินยอมให้ระบบสร้างรหัส P-Hash เพื่อใช้เป็นเกราะป้องกันการถูกแอบอ้างในระบบ Super Identity Hunter
+            </label>
+          </div>
+
+          <button type="submit" id="submitBtnKYC" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 py-3 rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-green-500/20 disabled:opacity-50 disabled:cursor-not-allowed">
+            ยืนยันการลงทะเบียน
+          </button>
+        </form>
+
+        <div id="statusKYC" class="mt-6 text-center hidden p-4 rounded-lg bg-gray-900/80 border">
+          <p id="statusMsgKYC" class="font-medium text-lg"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('kycForm');
+    const imageInput = document.getElementById('kycImageInput');
+    const dropZone = document.getElementById('dropZoneKYC');
+    const preview = document.getElementById('previewKYC');
+    const dropText = document.getElementById('dropTextKYC');
+    const statusDiv = document.getElementById('statusKYC');
+    const statusMsg = document.getElementById('statusMsgKYC');
+    const submitBtn = document.getElementById('submitBtnKYC');
+
+    // จัดการเลือกรูปภาพ
+    dropZone.onclick = () => imageInput.click();
+    imageInput.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          preview.src = event.target.result;
+          preview.classList.remove('hidden');
+          dropText.classList.add('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    // ส่งข้อมูลไป Python Backend
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      
+      const file = imageInput.files[0];
+      if (!file) return alert('กรุณาเลือกรูปภาพใบหน้าครับ');
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'กำลังประมวลผลอัตลักษณ์...';
+      statusDiv.classList.remove('hidden');
+      statusDiv.className = 'mt-6 text-center p-4 rounded-lg bg-blue-900/30 border border-blue-800';
+      statusMsg.className = 'text-blue-400 font-medium text-lg animate-pulse';
+      statusMsg.innerText = '🔄 กำลังแปลงใบหน้าเป็นรหัสดิจิทัล...';
+
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('name', document.getElementById('fullName').value);
+
+        // ดึง Token จาก Clerk
+        const session = await window.Clerk?.session?.getToken();
+
+        const response = await fetch('http://localhost:8000/register-kyc/', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${session}`
+          },
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          statusDiv.className = 'mt-6 text-center p-4 rounded-lg bg-green-900/30 border border-green-800';
+          statusMsg.className = 'text-green-400 font-bold text-lg';
+          statusMsg.innerHTML = `✅ สำเร็จ!<br><span class="text-sm font-normal text-green-300">${result.message}</span>`;
+          form.reset();
+          preview.classList.add('hidden');
+          dropText.classList.remove('hidden');
+        } else {
+          throw new Error(result.detail || 'เกิดข้อผิดพลาดในการเชื่อมต่อ');
+        }
+      } catch (err) {
+        statusDiv.className = 'mt-6 text-center p-4 rounded-lg bg-red-900/30 border border-red-800';
+        statusMsg.className = 'text-red-400 font-medium text-lg';
+        statusMsg.innerText = '❌ ผิดพลาด: ' + err.message;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'ยืนยันการลงทะเบียน';
+      }
+    };
+  </script>
+</Layout>

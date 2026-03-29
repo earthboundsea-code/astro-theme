@@ -20,3 +20,14 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+# Secrets & Credentials
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+.env
+*.db
+kyc_faces/
+scam_evidence/
+reports/
+__pycache__/
