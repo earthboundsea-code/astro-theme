@@ -1,0 +1,28 @@
+---
+import { SignIn } from '@clerk/astro/components';
+---
+
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ - Super Identity Hunter</title>
+</head>
+<body class="bg-slate-900 flex flex-col items-center justify-center min-h-screen p-4">
+    
+    <div class="mb-10 text-center">
+        <h1 class="text-4xl font-extrabold text-white tracking-tight mb-2">Super Identity Hunter</h1>
+        <p class="text-slate-400">กรุณาเข้าสู่ระบบเพื่อเข้าถึงฐานข้อมูลมิจฉาชีพ</p>
+    </div>
+
+    <div class="shadow-2xl rounded-2xl overflow-hidden">
+        <SignIn 
+            routing="path" 
+            path="/login" 
+            forceRedirectUrl="/scanner" 
+        />
+    </div>
+
+    <p class="mt-8 text-slate-500 text-sm">© 2026 Growupward.io - All Rights Reserved</p>
+</body>
+</html>
