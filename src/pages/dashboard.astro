@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro'; // ตรวจสอบว่าชื่อ Layout ตรงกับที่คุณมี
+const { auth } = Astro.locals;
+
+// ถ้ายังไม่ล็อกอิน ให้ดีดไปหน้า Login
+if (!auth().userId) {
+  return Astro.redirect('/login');
+}
+---
+
+<Layout title="เลือกบริการ - Super Identity Hunter">
+  <main class="min-h-screen bg-gray-900 text-white py-12 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl font-bold mb-4">ยินดีต้อนรับสู่ระบบตรวจสอบตัวตน</h1>
+      <p class="text-gray-400 mb-12">กรุณาเลือกบริการที่คุณต้องการใช้งาน</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <a href="/scanner" class="group p-8 bg-gray-800 border border-gray-700 rounded-2xl hover:border-blue-500 transition-all hover:scale-105">
+          <div class="text-4xl mb-4">🔍</div>
+          <h2 class="text-xl font-semibold mb-2 group-hover:text-blue-400">สแกนตรวจสอบ</h2>
+          <p class="text-sm text-gray-400">ถ่ายรูปหรืออัปโหลดรูปภาพเพื่อเช็คประวัติมิจฉาชีพ</p>
+        </a>
+
+        <a href="/report" class="group p-8 bg-gray-800 border border-gray-700 rounded-2xl hover:border-red-500 transition-all hover:scale-105">
+          <div class="text-4xl mb-4">🚩</div>
+          <h2 class="text-xl font-semibold mb-2 group-hover:text-red-400">แจ้งเบาะแส</h2>
+          <p class="text-sm text-gray-400">รายงานมิจฉาชีพรายใหม่พร้อมหลักฐานเข้าสู่ระบบ</p>
+        </a>
+
+        <a href="/kyc" class="group p-8 bg-gray-800 border border-gray-700 rounded-2xl hover:border-green-500 transition-all hover:scale-105">
+          <div class="text-4xl mb-4">🛡️</div>
+          <h2 class="text-xl font-semibold mb-2 group-hover:text-green-400">ลงทะเบียนคนดี</h2>
+          <p class="text-sm text-gray-400">ยืนยันตัวตนของคุณเพื่อป้องกันการแอบอ้าง</p>
+        </a>
+
+      </div>
+
+      <div class="mt-12">
+        <button onclick="window.location.href='/logout'" class="text-gray-500 hover:text-white underline text-sm">
+          ออกจากระบบ
+        </button>
+      </div>
+    </div>
+  </main>
+</Layout>

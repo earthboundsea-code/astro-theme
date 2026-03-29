@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+const { auth } = Astro.locals;
+
+// เช็คว่าล็อกอินหรือยัง
+if (!auth().userId) {
+  return Astro.redirect('/login');
+}
+---
+
+<Layout title="แจ้งเบาะแสมิจฉาชีพ - Cyber Hunter">
+  <main class="min-h-screen bg-gray-900 text-white py-12 px-4">
+    <div class="max-w-2xl mx-auto">
+      <a href="/dashboard" class="text-blue-400 hover:underline mb-6 inline-block">← กลับไปหน้าเลือกบริการ</a>
+      
+      <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 shadow-xl">
+        <h1 class="text-3xl font-bold mb-2 text-red-500">🚩 แจ้งเบาะแสมิจฉาชีพ</h1>
+        <p class="text-gray-400 mb-8">ข้อมูลของคุณจะถูกเก็บเป็นความลับและใช้เพื่อป้องกันสังคม</p>
+
+        <form id="reportForm" class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium mb-2">ลิงก์ปลอม / URL ที่พบ (ถ้ามี)</label>
+            <input type="text" id="fake_url" name="fake_url" placeholder="https://..." 
+              class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-500 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2">พบจากช่องทางไหน?</label>
+            <select id="platform" name="platform" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 outline-none">
+              <option value="Facebook">Facebook</option>
+              <option value="Line">Line</option>
+              <option value="TikTok">TikTok</option>
+              <option value="Messenger">Messenger</option>
+              <option value="Other">อื่นๆ</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2">รูปภาพใบหน้ามิจฉาชีพ / ภาพโปรไฟล์</label>
+            <input type="file" id="imageInput" accept="image/*" class="hidden">
+            <div id="dropZone" class="border-2 border-dashed border-gray-600 rounded-xl p-8 text-center cursor-pointer hover:border-red-500 transition-colors">
+              <span id="dropText">คลิกเพื่อเลือกรูปภาพ หรือ ลากไฟล์มาวางที่นี่</span>
+              <img id="preview" class="hidden mt-4 mx-auto max-h-48 rounded-lg">
+            </div>
+          </div>
+
+          <button type="submit" id="submitBtn" class="w-full bg-red-600 hover:bg-red-700 py-3 rounded-xl font-bold text-lg transition-colors disabled:bg-gray-600">
+            ยืนยันการส่งข้อมูล
+          </button>
+        </form>
+
+        <div id="status" class="mt-6 text-center hidden">
+          <p id="statusMsg" class="font-medium"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('reportForm');
+    const imageInput = document.getElementById('imageInput');
+    const dropZone = document.getElementById('dropZone');
+    const preview = document.getElementById('preview');
+    const dropText = document.getElementById('dropText');
+    const statusDiv = document.getElementById('status');
+    const statusMsg = document.getElementById('statusMsg');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // จัดการเลือกรูปภาพ
+    dropZone.onclick = () => imageInput.click();
+    imageInput.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          preview.src = event.target.result;
+          preview.classList.remove('hidden');
+          dropText.classList.add('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    // ส่งข้อมูลไป Python Backend
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      
+      const file = imageInput.files[0];
+      if (!file) return alert('กรุณาเลือกรูปภาพหลักฐานครับ');
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'กำลังบันทึกข้อมูล...';
+      statusDiv.classList.remove('hidden');
+      statusMsg.innerText = 'กำลังส่งข้อมูลไปยังฐานข้อมูล...';
+
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('fake_url', document.getElementById('fake_url').value || 'N/A');
+        formData.append('platform', document.getElementById('platform').value);
+
+        // ดึง Token จาก Clerk
+        const session = await window.Clerk?.session?.getToken();
+
+        const response = await fetch('http://localhost:8000/report-scammer/', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${session}`
+          },
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          statusMsg.className = 'text-green-400';
+          statusMsg.innerText = '✅ ' + result.message;
+          form.reset();
+          preview.classList.add('hidden');
+          dropText.classList.remove('hidden');
+        } else {
+          throw new Error(result.detail || 'เกิดข้อผิดพลาด');
+        }
+      } catch (err) {
+        statusMsg.className = 'text-red-400';
+        statusMsg.innerText = '❌ ผิดพลาด: ' + err.message;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'ยืนยันการส่งข้อมูล';
+      }
+    };
+  </script>
+</Layout>
